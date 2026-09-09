@@ -1,2689 +1,1072 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Fatih ❤️</title>
 
 <style>
-
-/* =====================================================
-   GENEL
-===================================================== */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#030006;
+    font-family:Arial,sans-serif;
 }
 
-body {
+body{
     background:
-        radial-gradient(
-            circle at 50% 100%,
-            #35004f 0%,
-            #100018 48%,
-            #020005 100%
-        );
-
-    color: white;
-    font-family: Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+        radial-gradient(circle at 50% 90%,#310047 0%,#100018 45%,#020005 100%);
 }
 
-
-/* =====================================================
-   YILDIZLAR
-===================================================== */
-
-#stars,
-#stars2,
-#stars3 {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
+canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
 }
 
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: white;
-
-    box-shadow:
-        0 0 4px white,
-        0 0 7px #ffb6e0;
-
-    opacity: .7;
-
-    animation:
-        twinkle
-        var(--duration)
-        ease-in-out
-        infinite;
-
-    will-change: opacity, transform;
+#stars{
+    z-index:1;
 }
 
-.star.big {
-    width: 3px;
-    height: 3px;
-
-    box-shadow:
-        0 0 5px white,
-        0 0 10px #ff4fa3;
+#effects{
+    z-index:10;
 }
 
-@keyframes twinkle {
-
-    0%, 100% {
-        opacity: .15;
-        transform: scale(.7);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.25);
-    }
+#screen{
+    position:fixed;
+    inset:0;
+    z-index:20;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    cursor:pointer;
 }
 
-
-/* =====================================================
-   ANA EKRAN
-===================================================== */
-
-#screen {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    cursor: pointer;
-
-    position: relative;
-    z-index: 10;
-
-    will-change: transform;
+#content{
+    position:relative;
+    width:100%;
+    padding:20px;
 }
 
-#content {
-    position: relative;
-    z-index: 100;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-}
-
-
-/* =====================================================
-   MESAJLAR
-===================================================== */
-
-.message {
-    font-size: clamp(30px, 8vw, 58px);
-    font-weight: bold;
-    line-height: 1.3;
-
+.message{
+    color:white;
+    font-size:clamp(28px,8vw,58px);
+    font-weight:bold;
+    line-height:1.3;
     text-shadow:
-        0 0 8px #ff4fa3,
-        0 0 20px #ff4fa3,
-        0 0 35px #ff1493;
-
-    animation:
-        textEnter
-        .8s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
-
-    will-change: transform, opacity;
+        0 0 10px #ff4fa3,
+        0 0 25px #ff1493,
+        0 0 55px #ff1493;
+    animation:textIn .65s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes textEnter {
-
-    0% {
-        opacity: 0;
-        transform:
-            translateY(25px)
-            scale(.85);
-        filter: blur(5px);
-    }
-
-    60% {
-        opacity: 1;
-        transform:
-            translateY(-4px)
-            scale(1.03);
-        filter: blur(0);
-    }
-
-    100% {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-        filter: blur(0);
-    }
+.tap{
+    color:#ffd6ec;
+    font-size:22px;
+    animation:blink 1.2s infinite;
 }
 
-.tap {
-    font-size: 22px;
-    color: #ffd6ec;
-
-    animation:
-        blink
-        1.2s
-        infinite;
+#pampimArea{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
 }
 
-
-/* =====================================================
-   PAMPİM + SAYIM
-===================================================== */
-
-#pampimArea {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-
-    animation:
-        textEnter
-        .8s
-        ease
-        forwards;
-}
-
-#countdown {
-    font-size: clamp(75px, 20vw, 130px);
-    font-weight: bold;
-
-    color: #ff4fa3;
-
+#countdown{
+    font-size:clamp(75px,20vw,135px);
+    font-weight:bold;
+    color:#ff4fa3;
     text-shadow:
-        0 0 8px #ff4fa3,
-        0 0 20px #ff1493,
-        0 0 45px #ff1493;
-
-    animation:
-        countdownAppear
-        .8s
-        ease;
-
-    will-change: transform, opacity;
+        0 0 15px #ff4fa3,
+        0 0 40px #ff1493,
+        0 0 80px #ff1493;
+    animation:countIn .7s ease;
 }
 
-
-/* =====================================================
+/* =========================
    ROKET
-===================================================== */
+========================= */
 
-#rocket {
-    position: fixed;
-
-    left: 50%;
-    bottom: -180px;
-
-    width: 90px;
-    height: 190px;
-
-    transform: translateX(-50%);
-
-    display: none;
-
-    z-index: 50;
-
-    will-change: bottom, transform;
+#rocket{
+    position:fixed;
+    left:50%;
+    bottom:-190px;
+    width:76px;
+    height:155px;
+    transform:translateX(-50%);
+    z-index:30;
+    display:none;
 }
 
-.rocket-body {
-    position: absolute;
+#rocket.active{
+    display:block;
+    animation:rocketFly 2.5s cubic-bezier(.25,.75,.2,1) forwards;
+}
 
-    left: 50%;
-    bottom: 30px;
-
-    width: 55px;
-    height: 125px;
-
-    transform: translateX(-50%);
-
-    border-radius: 50% 50% 18% 18%;
-
+.rocket-body{
+    position:absolute;
+    left:50%;
+    bottom:20px;
+    width:48px;
+    height:105px;
+    transform:translateX(-50%);
+    border-radius:50% 50% 17px 17px;
     background:
         linear-gradient(
             90deg,
-            #555,
-            #ddd 22%,
-            white 50%,
-            #ccc 70%,
-            #555
+            #4b4b4b,
+            #ddd 20%,
+            #fff 48%,
+            #c9c9c9 75%,
+            #4a4a4a
         );
-
     box-shadow:
-        inset 5px 0 8px rgba(255,255,255,.6),
-        inset -5px 0 8px rgba(0,0,0,.3);
+        inset 5px 0 7px rgba(255,255,255,.65),
+        inset -6px 0 8px rgba(0,0,0,.45),
+        0 0 10px rgba(255,255,255,.2);
 }
 
-.rocket-nose {
-    position: absolute;
-
-    top: -30px;
-    left: 0;
-
-    width: 55px;
-    height: 45px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #666,
-            #fff,
-            #aaa
-        );
-
-    clip-path:
-        polygon(
-            50% 0,
-            100% 100%,
-            0 100%
-        );
+.nose{
+    position:absolute;
+    left:0;
+    top:-32px;
+    width:48px;
+    height:38px;
+    background:linear-gradient(90deg,#666,#fff,#aaa);
+    clip-path:polygon(50% 0,100% 100%,0 100%);
 }
 
-.rocket-window {
-    position: absolute;
-
-    top: 27px;
-    left: 50%;
-
-    width: 25px;
-    height: 25px;
-
-    transform: translateX(-50%);
-
-    border-radius: 50%;
-
-    border: 4px solid #555;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            white,
-            #54d9ff 35%,
-            #07559e 100%
-        );
-
-    box-shadow:
-        0 0 8px #4fd6ff;
+.window{
+    position:absolute;
+    left:50%;
+    top:22px;
+    width:23px;
+    height:23px;
+    transform:translateX(-50%);
+    border-radius:50%;
+    border:4px solid #555;
+    background:radial-gradient(circle at 35% 30%,#fff,#58dcff 35%,#07559e);
+    box-shadow:0 0 10px #50d8ff;
 }
 
-.rocket-line {
-    position: absolute;
-
-    left: 0;
-    top: 67px;
-
-    width: 100%;
-    height: 6px;
-
-    background: #ff164d;
+.line{
+    position:absolute;
+    left:0;
+    top:58px;
+    width:100%;
+    height:5px;
+    background:#ff164d;
 }
 
-.rocket-wing {
-    position: absolute;
-
-    bottom: 32px;
-
-    width: 32px;
-    height: 65px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff315f,
-            #81002d
-        );
-
-    z-index: -1;
+.wing{
+    position:absolute;
+    bottom:19px;
+    width:30px;
+    height:58px;
+    background:linear-gradient(135deg,#ff315f,#7d002c);
+    z-index:-1;
 }
 
-.rocket-wing.left {
-    left: 2px;
-    transform: translateX(-22px);
-
-    clip-path:
-        polygon(
-            100% 0,
-            100% 100%,
-            0 100%
-        );
+.wing.left{
+    left:0;
+    transform:translateX(-20px);
+    clip-path:polygon(100% 0,100% 100%,0 100%);
 }
 
-.rocket-wing.right {
-    right: 2px;
-    transform: translateX(22px);
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 100%,
-            0 100%
-        );
+.wing.right{
+    right:0;
+    transform:translateX(20px);
+    clip-path:polygon(0 0,100% 100%,0 100%);
 }
 
-.rocket-engine {
-    position: absolute;
-
-    left: 50%;
-    bottom: 15px;
-
-    width: 30px;
-    height: 25px;
-
-    transform: translateX(-50%);
-
-    background: #222;
-
-    border-radius: 0 0 12px 12px;
+.engine{
+    position:absolute;
+    left:50%;
+    bottom:5px;
+    width:26px;
+    height:22px;
+    transform:translateX(-50%);
+    background:#222;
+    border-radius:0 0 10px 10px;
 }
 
+/* Alev */
 
-/* =====================================================
-   ALEV
-===================================================== */
-
-#flame {
-    position: fixed;
-
-    left: 50%;
-    bottom: -55px;
-
-    width: 45px;
-    height: 110px;
-
-    transform: translateX(-50%);
-
-    display: none;
-
-    z-index: 45;
-
-    will-change: transform;
+#flame{
+    position:fixed;
+    left:50%;
+    bottom:-45px;
+    width:38px;
+    height:95px;
+    transform:translateX(-50%);
+    z-index:29;
+    display:none;
+    pointer-events:none;
 }
 
-.flame-core {
-    width: 30px;
-    height: 100px;
+#flame.active{
+    display:block;
+}
 
-    position: absolute;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    border-radius: 50% 50% 70% 70%;
-
-    background:
-        linear-gradient(
-            to bottom,
-            white 0%,
-            #fff700 20%,
-            #ff8c00 55%,
-            #ff1e00 100%
-        );
-
+.flameCore{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:25px;
+    height:90px;
+    transform:translateX(-50%);
+    border-radius:50% 50% 65% 65%;
+    background:linear-gradient(
+        to bottom,
+        white 0%,
+        #fff700 20%,
+        #ff8c00 55%,
+        #ff2100 100%
+    );
     filter:
-        blur(1.5px)
-        drop-shadow(0 0 10px #ff7b00);
+        blur(2px)
+        drop-shadow(0 0 12px #ff8c00)
+        drop-shadow(0 0 30px #ff2600);
+    animation:flame .08s infinite alternate;
 }
 
-.flame-active {
-    display: block;
-
-    animation:
-        flameShake
-        .07s
-        infinite
-        alternate;
-}
-
-.rocket-active {
-    display: block !important;
-
-    animation:
-        rocketFlight
-        2.7s
-        cubic-bezier(.25,.05,.15,1)
-        forwards;
-}
-
-@keyframes rocketFlight {
-
-    0% {
-        bottom: -180px;
-        transform:
-            translateX(-50%)
-            rotate(-2deg);
-    }
-
-    15% {
-        transform:
-            translateX(-50%)
-            rotate(3deg);
-    }
-
-    30% {
-        transform:
-            translateX(-50%)
-            rotate(-3deg);
-    }
-
-    45% {
-        transform:
-            translateX(-50%)
-            rotate(2deg);
-    }
-
-    60% {
-        transform:
-            translateX(-50%)
-            rotate(-2deg);
-    }
-
-    80% {
-        transform:
-            translateX(-50%)
-            rotate(1deg);
-    }
-
-    100% {
-        bottom: 57%;
-        transform:
-            translateX(-50%)
-            rotate(0deg);
-    }
-}
-
-@keyframes flameShake {
-
-    from {
-        transform:
-            translateX(-50%)
-            scaleY(1);
-    }
-
-    to {
-        transform:
-            translateX(-50%)
-            scaleY(.65);
-    }
-}
-
-
-/* =====================================================
-   DUMAN
-===================================================== */
-
-.smoke {
-    position: fixed;
-
-    width: 12px;
-    height: 12px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(210,210,210,.35);
-
-    filter: blur(4px);
-
-    z-index: 10;
-
-    pointer-events: none;
-
-    animation:
-        smoke
-        .8s
-        ease-out
-        forwards;
-
-    will-change: transform, opacity;
-}
-
-@keyframes smoke {
-
-    0% {
-        transform: scale(.5);
-        opacity: .7;
-    }
-
-    100% {
-        transform: scale(2.5);
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   PATLAMA
-===================================================== */
-
-#blast {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    width: 30px;
-    height: 30px;
-
-    border-radius: 50%;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0);
-
-    z-index: 80;
-
-    pointer-events: none;
-
-    will-change: transform, opacity;
-}
-
-.blast-active {
-    animation:
-        blast
-        1.1s
-        ease-out
-        forwards;
-}
-
-@keyframes blast {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(.1);
-
-        background: white;
-
-        box-shadow:
-            0 0 15px white;
-
-        opacity: 1;
-    }
-
-    15% {
-        transform:
-            translate(-50%, -50%)
-            scale(3);
-
-        background: white;
-
-        box-shadow:
-            0 0 30px white,
-            0 0 60px #ffe600,
-            0 0 90px #ff6600;
-    }
-
-    35% {
-        transform:
-            translate(-50%, -50%)
-            scale(7);
-
-        background:
-            radial-gradient(
-                circle,
-                #fff,
-                #ffea00 25%,
-                #ff7300 60%,
-                #ff1700 100%
-            );
-
-        box-shadow:
-            0 0 35px #ffcc00,
-            0 0 80px #ff4500;
-    }
-
-    100% {
-        transform:
-            translate(-50%, -50%)
-            scale(25);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   ATEŞ TOPLARI
-===================================================== */
-
-.fireball {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    width: 15px;
-    height: 15px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            white 0%,
-            #fff000 20%,
-            #ff8c00 55%,
-            #ff1b00 100%
-        );
-
-    box-shadow:
-        0 0 7px white,
-        0 0 18px #ff8c00,
-        0 0 30px #ff2600;
-
-    z-index: 82;
-
-    pointer-events: none;
-
-    animation:
-        fireballFly
-        1.1s
-        cubic-bezier(.1,.6,.2,1)
-        forwards;
-
-    will-change: transform, opacity;
-}
-
-@keyframes fireballFly {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.3);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(
-                calc(-50% + var(--x)),
-                calc(-50% + var(--y))
-            )
-            scale(.05);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   KIVILCIM
-===================================================== */
-
-.spark {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    width: 4px;
-    height: 4px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    box-shadow:
-        0 0 6px white,
-        0 0 12px #ff8500;
-
-    z-index: 84;
-
-    pointer-events: none;
-
-    animation:
-        sparkFly
-        1.2s
-        ease-out
-        forwards;
-
-    will-change: transform, opacity;
-}
-
-@keyframes sparkFly {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(1.3);
-
-        opacity: 1;
-    }
-
-    to {
-        transform:
-            translate(
-                calc(-50% + var(--x)),
-                calc(-50% + var(--y))
-            )
-            scale(.1);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   ROKET PARÇALARI
-===================================================== */
-
-.rocket-piece {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ddd,
-            #777
-        );
-
-    z-index: 81;
-
-    pointer-events: none;
-
-    animation:
-        rocketPiece
-        1s
-        ease-out
-        forwards;
-
-    will-change: transform, opacity;
-}
-
-@keyframes rocketPiece {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            rotate(0)
-            scale(1);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(
-                calc(-50% + var(--x)),
-                calc(-50% + var(--y))
-            )
-            rotate(540deg)
-            scale(.1);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   KALP PARÇACIKLARI
-===================================================== */
-
-#heartLayer {
-    position: fixed;
-    inset: 0;
-
-    pointer-events: none;
-    z-index: 90;
-}
-
-.heart {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    opacity: 0;
-
-    font-size: 15px;
-
-    filter:
-        drop-shadow(0 0 5px #ff1493);
-
-    animation:
-        heartForm
-        2.1s
-        cubic-bezier(.15,.8,.2,1)
-        forwards;
-
-    will-change: transform, opacity;
-}
-
-@keyframes heartForm {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(.1);
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(
-                calc(-50% + var(--x)),
-                calc(-50% + var(--y))
-            )
-            scale(var(--scale));
-
-        opacity: 1;
-    }
-}
-
-
-/* =====================================================
+/* =========================
    BÜYÜK KALP
-===================================================== */
+========================= */
 
-#bigHeart {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    width: clamp(180px, 58vw, 340px);
-    height: clamp(180px, 58vw, 340px);
-
-    transform:
-        translate(-50%, -50%)
-        scale(0);
-
-    opacity: 0;
-
-    z-index: 105;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    pointer-events: none;
-
-    will-change: transform, opacity;
+#heartScene{
+    position:fixed;
+    left:50%;
+    top:43%;
+    width:min(80vw,390px);
+    height:min(80vw,390px);
+    transform:translate(-50%,-50%);
+    z-index:50;
+    opacity:0;
+    pointer-events:none;
 }
 
-#bigHeart::before {
-    content: "❤";
+#heartScene.show{
+    animation:heartSceneIn 1.1s ease forwards;
+}
 
-    position: absolute;
+.heartGlow{
+    position:absolute;
+    inset:4%;
+    background:#ff1493;
+    opacity:.13;
+    filter:blur(25px);
+    clip-path:polygon(
+        50% 92%,
+        10% 48%,
+        12% 25%,
+        28% 12%,
+        50% 28%,
+        72% 12%,
+        88% 25%,
+        90% 48%
+    );
+}
 
-    font-size:
-        clamp(180px, 58vw, 340px);
-
-    color: #ff1493;
-
-    opacity: .13;
-
+.bigHeart{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:min(58vw,300px);
+    line-height:1;
+    color:#ff1493;
     filter:
-        blur(1px)
-        drop-shadow(0 0 15px #ff1493);
+        drop-shadow(0 0 10px #ff1493)
+        drop-shadow(0 0 30px #ff1493)
+        drop-shadow(0 0 70px #ff1493);
+    animation:heartbeat 1.4s ease-in-out infinite;
 }
 
-#bigHeart.big-heart-active {
-    animation:
-        backgroundHeart
-        3.5s
-        ease
-        forwards;
+#heartText{
+    position:fixed;
+    left:50%;
+    top:76%;
+    width:92%;
+    transform:translateX(-50%);
+    z-index:70;
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
 }
 
-@keyframes backgroundHeart {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(.15);
-
-        opacity: 0;
-    }
-
-    35% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.05);
-
-        opacity: 1;
-    }
-
-    55% {
-        transform:
-            translate(-50%, -50%)
-            scale(.96);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
-        opacity: 1;
-    }
+#heartText.show{
+    animation:textIn 1s ease forwards;
 }
 
-
-/* =====================================================
-   İÇ KALP
-===================================================== */
-
-#innerHeart {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    z-index: 120;
-
-    font-size:
-        clamp(45px, 17vw, 105px);
-
-    color: #ff174f;
-
-    opacity: 0;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0);
-
-    pointer-events: none;
-
-    filter:
-        drop-shadow(0 0 7px white)
-        drop-shadow(0 0 15px #ff1493)
-        drop-shadow(0 0 30px #ff1493);
-
-    will-change: transform, opacity;
-}
-
-.inner-heart-active {
-    animation:
-        innerHeartBirth
-        2.4s
-        cubic-bezier(.15,.8,.2,1)
-        forwards;
-}
-
-@keyframes innerHeartBirth {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(0);
-
-        opacity: 0;
-    }
-
-    25% {
-        transform:
-            translate(-50%, -50%)
-            scale(.35);
-
-        opacity: 1;
-    }
-
-    45% {
-        transform:
-            translate(-50%, -50%)
-            scale(.85);
-    }
-
-    58% {
-        transform:
-            translate(-50%, -50%)
-            scale(.72);
-    }
-
-    70% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.12);
-    }
-
-    80% {
-        transform:
-            translate(-50%, -50%)
-            scale(.94);
-    }
-
-    90% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.07);
-    }
-
-    100% {
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
-        opacity: 1;
-    }
-}
-
-.inner-heart-pulse {
-    animation:
-        heartPulse
-        .65s
-        ease-in-out;
-}
-
-@keyframes heartPulse {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-    }
-
-    20% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.16);
-    }
-
-    38% {
-        transform:
-            translate(-50%, -50%)
-            scale(.95);
-    }
-
-    55% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.08);
-    }
-
-    100% {
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-    }
-}
-
-
-/* =====================================================
-   KALP IŞIĞI
-===================================================== */
-
-.heart-glow {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0);
-
-    opacity: 0;
-
-    z-index: 119;
-
-    pointer-events: none;
-
-    filter: blur(4px);
-}
-
-.heart-glow.active {
-    animation:
-        heartGlow
-        2.4s
-        ease
-        forwards;
-}
-
-@keyframes heartGlow {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(0);
-
-        opacity: 0;
-    }
-
-    30% {
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
-        opacity: .8;
-    }
-
-    50% {
-        transform:
-            translate(-50%, -50%)
-            scale(2.2);
-
-        opacity: .35;
-    }
-
-    100% {
-        transform:
-            translate(-50%, -50%)
-            scale(0);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   IŞIK PARÇACIKLARI
-===================================================== */
-
-.light-particle {
-    position: fixed;
-
-    left: 50%;
-    top: 43%;
-
-    width: 5px;
-    height: 5px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    box-shadow:
-        0 0 6px white,
-        0 0 12px #ff4fa3;
-
-    z-index: 125;
-
-    pointer-events: none;
-
-    animation:
-        lightFly
-        1.4s
-        ease-out
-        forwards;
-
-    will-change: transform, opacity;
-}
-
-@keyframes lightFly {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            scale(.2);
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(
-                calc(-50% + var(--x)),
-                calc(-50% + var(--y))
-            )
-            scale(.05);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   UÇAN KÜÇÜK KALPLER
-===================================================== */
-
-.floating-heart {
-    position: fixed;
-
-    bottom: -40px;
-
-    font-size: var(--size);
-
-    opacity: 0;
-
-    z-index: 95;
-
-    pointer-events: none;
-
-    filter:
-        drop-shadow(0 0 5px #ff1493);
-
-    animation:
-        floatHeart
-        var(--duration)
-        linear
-        forwards;
-
-    will-change: transform, opacity;
-}
-
-@keyframes floatHeart {
-
-    0% {
-        transform:
-            translateX(0)
-            translateY(0)
-            rotate(0)
-            scale(.5);
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: .8;
-    }
-
-    50% {
-        transform:
-            translateX(var(--drift))
-            translateY(-50vh)
-            rotate(25deg)
-            scale(1);
-    }
-
-    100% {
-        transform:
-            translateX(calc(var(--drift) * -1))
-            translateY(-115vh)
-            rotate(-25deg)
-            scale(.7);
-
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   FINAL YAZISI
-===================================================== */
-
-#finalMessage {
-    position: fixed;
-
-    left: 50%;
-    top: 67%;
-
-    width: 94%;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 150;
-
-    text-align: center;
-
-    opacity: 0;
-
-    animation:
-        finalText
-        1.2s
-        ease
-        forwards;
-}
-
-.final-main {
-    font-size:
-        clamp(25px, 6vw, 50px);
-
-    font-weight: bold;
-
-    color: white;
-
+.finalMain{
+    color:#fff;
+    font-size:clamp(23px,6vw,48px);
+    font-weight:bold;
     text-shadow:
-        0 0 8px #ff4fa3,
-        0 0 20px #ff1493,
-        0 0 40px #ff1493;
+        0 0 10px #ff4fa3,
+        0 0 30px #ff1493,
+        0 0 60px #ff1493;
 }
 
-@keyframes finalText {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateX(-50%)
-            translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
+.finalPampim{
+    margin-top:10px;
+    color:#ffb6da;
+    font-size:clamp(19px,5vw,32px);
+    font-weight:bold;
+    text-shadow:
+        0 0 10px #ff1493,
+        0 0 25px #ff1493;
 }
 
+/* =========================
+   ANİMASYONLAR
+========================= */
 
-/* =====================================================
-   SARSINTI
-===================================================== */
-
-.shake {
-    animation:
-        shake
-        .45s
-        ease;
-}
-
-@keyframes shake {
-
-    0% {
-        transform: translate(0,0);
+@keyframes textIn{
+    from{
+        opacity:0;
+        transform:translateY(18px) scale(.94);
+        filter:blur(5px);
     }
-
-    20% {
-        transform: translate(-8px,5px);
-    }
-
-    40% {
-        transform: translate(7px,-6px);
-    }
-
-    60% {
-        transform: translate(-6px,-4px);
-    }
-
-    80% {
-        transform: translate(6px,5px);
-    }
-
-    100% {
-        transform: translate(0,0);
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+        filter:blur(0);
     }
 }
 
+@keyframes blink{
+    0%,100%{opacity:.35}
+    50%{opacity:1}
+}
 
-/* =====================================================
-   DİĞER
-===================================================== */
-
-@keyframes blink {
-
-    0%,100% {
-        opacity: .35;
+@keyframes countIn{
+    from{
+        opacity:0;
+        transform:scale(1.7);
     }
-
-    50% {
-        opacity: 1;
+    to{
+        opacity:1;
+        transform:scale(1);
     }
 }
 
-@keyframes countdownAppear {
-
-    from {
-        transform: scale(1.5);
-        opacity: 0;
+@keyframes rocketFly{
+    0%{
+        bottom:-190px;
+        transform:translateX(-50%) rotate(-2deg);
     }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
+    20%{
+        transform:translateX(-50%) rotate(2deg);
     }
-}
-
-
-/* =====================================================
-   MOBİL OPTİMİZASYONU
-===================================================== */
-
-@media (max-width: 600px) {
-
-    .message {
-        text-shadow:
-            0 0 7px #ff4fa3,
-            0 0 15px #ff1493;
+    40%{
+        transform:translateX(-50%) rotate(-1.5deg);
     }
-
-    #innerHeart {
-        filter:
-            drop-shadow(0 0 5px white)
-            drop-shadow(0 0 12px #ff1493);
+    60%{
+        transform:translateX(-50%) rotate(1deg);
     }
-
-    #bigHeart::before {
-        filter:
-            drop-shadow(0 0 12px #ff1493);
+    80%{
+        transform:translateX(-50%) rotate(-.5deg);
     }
-
-    .heart,
-    .floating-heart {
-        filter:
-            drop-shadow(0 0 4px #ff1493);
+    100%{
+        bottom:55%;
+        transform:translateX(-50%) rotate(0);
     }
 }
 
-
-/* =====================================================
-   HAREKET AZALTMA
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
+@keyframes flame{
+    from{
+        transform:translateX(-50%) scaleY(1);
+    }
+    to{
+        transform:translateX(-50%) scaleY(.62);
     }
 }
 
+@keyframes heartSceneIn{
+    0%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(.15);
+    }
+    45%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.08);
+    }
+    70%{
+        transform:translate(-50%,-50%) scale(.95);
+    }
+    100%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1);
+    }
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform:scale(1);
+    }
+    15%{
+        transform:scale(1.10);
+    }
+    28%{
+        transform:scale(.96);
+    }
+    42%{
+        transform:scale(1.06);
+    }
+    58%{
+        transform:scale(1);
+    }
+}
 </style>
 </head>
 
 <body>
 
-
-<!-- YILDIZLAR -->
-
-<div id="stars"></div>
-<div id="stars2"></div>
-<div id="stars3"></div>
-
-
-<!-- ANA EKRAN -->
+<canvas id="stars"></canvas>
+<canvas id="effects"></canvas>
 
 <div id="screen">
-
     <div id="content">
-
-        <div class="tap">
-            Ekrana tıkla ❤️
-        </div>
-
+        <div class="tap">Ekrana tıkla ❤️</div>
     </div>
-
 </div>
-
-
-<!-- ROKET -->
 
 <div id="rocket">
-
-    <div class="rocket-wing left"></div>
-    <div class="rocket-wing right"></div>
+    <div class="wing left"></div>
+    <div class="wing right"></div>
 
     <div class="rocket-body">
-
-        <div class="rocket-nose"></div>
-
-        <div class="rocket-window"></div>
-
-        <div class="rocket-line"></div>
-
+        <div class="nose"></div>
+        <div class="window"></div>
+        <div class="line"></div>
     </div>
 
-    <div class="rocket-engine"></div>
-
+    <div class="engine"></div>
 </div>
-
 
 <div id="flame">
-    <div class="flame-core"></div>
+    <div class="flameCore"></div>
 </div>
 
-
-<div id="blast"></div>
-
-<div id="heartLayer"></div>
-
-<div id="bigHeart"></div>
-
-<div id="innerHeart">
-    ❤️
+<div id="heartScene">
+    <div class="heartGlow"></div>
+    <div class="bigHeart">❤️</div>
 </div>
 
-<div
-    class="heart-glow"
-    id="heartGlow">
+<div id="heartText">
+    <div class="finalMain">
+        Seni çok seviyorum Fatih ❤️
+    </div>
+    <div class="finalPampim">
+        Pampimmmmmmm 🥹❤️
+    </div>
 </div>
-
 
 <script>
-
 /* =====================================================
-   YILDIZLAR
-   Öncekinden daha az element
+   TEMEL
 ===================================================== */
 
-function createStars(layerId, amount) {
-
-    const layer =
-        document.getElementById(layerId);
-
-    const fragment =
-        document.createDocumentFragment();
-
-    for (let i = 0; i < amount; i++) {
-
-        const star =
-            document.createElement("div");
-
-        star.className = "star";
-
-        if (Math.random() > .88) {
-            star.classList.add("big");
-        }
-
-        star.style.left =
-            Math.random() * 100 + "vw";
-
-        star.style.top =
-            Math.random() * 100 + "vh";
-
-        star.style.setProperty(
-            "--duration",
-            (
-                1.8 +
-                Math.random() * 2.5
-            ) + "s"
-        );
-
-        star.style.animationDelay =
-            Math.random() * 3 + "s";
-
-        fragment.appendChild(star);
-    }
-
-    layer.appendChild(fragment);
-}
-
-
-/*
-    Toplam:
-    160 yerine 85 yıldız
-*/
-
-createStars("stars", 45);
-createStars("stars2", 25);
-createStars("stars3", 15);
-
-
-/* =====================================================
-   ELEMENTLER
-===================================================== */
-
-const screen =
-    document.getElementById("screen");
-
-const content =
-    document.getElementById("content");
-
-const rocket =
-    document.getElementById("rocket");
-
-const flame =
-    document.getElementById("flame");
-
-const blast =
-    document.getElementById("blast");
-
-const heartLayer =
-    document.getElementById("heartLayer");
-
-const bigHeart =
-    document.getElementById("bigHeart");
-
+const screen = document.getElementById("screen");
+const content = document.getElementById("content");
+const rocket = document.getElementById("rocket");
+const flame = document.getElementById("flame");
+const heartScene = document.getElementById("heartScene");
+const heartText = document.getElementById("heartText");
 
 let step = 0;
-
 let finished = false;
-
-
-/* =====================================================
-   MESAJLAR
-===================================================== */
+let countdownStarted = false;
 
 const messages = [
-
     "Tıkla Fatih... ❤️",
-
     "Sana bir şey söyleyeceğim...",
-
     "İyi ki...",
-
     "İyi ki seni tanımışım... 🥹",
-
     "Seni çok seviyorum..."
-
 ];
 
-
 /* =====================================================
-   MESAJ GÖSTER
+   YAZILAR
 ===================================================== */
 
-function showMessage(text) {
-
+function showMessage(text){
     content.innerHTML = "";
 
-    const message =
-        document.createElement("div");
+    const div = document.createElement("div");
+    div.className = "message";
+    div.textContent = text;
 
-    message.className =
-        "message";
-
-    message.textContent =
-        text;
-
-    content.appendChild(message);
+    content.appendChild(div);
 }
-
 
 /* =====================================================
    TIKLAMA
 ===================================================== */
 
-screen.addEventListener(
-    "click",
-    function() {
+screen.addEventListener("click", () => {
 
-        if (finished)
-            return;
+    if(finished) return;
 
+    if(step < messages.length){
 
-        if (step === messages.length) {
+        showMessage(messages[step]);
 
-            content.innerHTML = `
+        step++;
 
-                <div id="pampimArea">
+        return;
+    }
 
-                    <div class="message">
-                        Pampimmmmmmm ❤️
-                    </div>
+    if(step === messages.length && !countdownStarted){
 
-                    <div id="countdown">
-                        7
-                    </div>
+        countdownStarted = true;
 
-                </div>
+        content.innerHTML = `
+            <div id="pampimArea">
+                <div class="message">Pampimmmmmmm ❤️</div>
+                <div id="countdown">7</div>
+            </div>
+        `;
 
-            `;
-
-            step++;
-
-            startCountdown();
-
-            return;
-        }
-
-
-        if (step < messages.length) {
-
-            showMessage(
-                messages[step]
-            );
-
-            step++;
-        }
-
-    },
-    { passive: true }
-);
-
+        startCountdown();
+    }
+});
 
 /* =====================================================
    GERİ SAYIM
 ===================================================== */
 
-function startCountdown() {
+function startCountdown(){
 
     let number = 7;
 
-    const counter =
-        setInterval(
-            function() {
+    const timer = setInterval(() => {
 
-                number--;
+        number--;
 
-                if (number > 0) {
+        const counter =
+            document.getElementById("countdown");
 
-                    const countdown =
-                        document.getElementById(
-                            "countdown"
-                        );
+        if(number > 0){
 
-                    if (countdown) {
+            if(counter){
 
-                        countdown.textContent =
-                            number;
+                counter.textContent = number;
 
-                        countdown.style.animation =
-                            "none";
+                counter.style.animation = "none";
+                void counter.offsetWidth;
+                counter.style.animation =
+                    "countIn .7s ease";
+            }
 
-                        void countdown.offsetWidth;
+        }else{
 
-                        countdown.style.animation =
-                            "countdownAppear .8s ease";
-                    }
+            clearInterval(timer);
 
-                } else {
+            content.innerHTML = "";
 
-                    clearInterval(counter);
+            launchRocket();
+        }
 
-                    content.innerHTML = "";
-
-                    launchRocket();
-                }
-
-            },
-            1000
-        );
+    },1000);
 }
-
 
 /* =====================================================
    ROKET
 ===================================================== */
 
-function launchRocket() {
+function launchRocket(){
 
     finished = true;
 
-    rocket.style.display = "block";
+    rocket.classList.add("active");
+    flame.classList.add("active");
 
-    rocket.classList.add(
-        "rocket-active"
-    );
+    startSmoke();
 
-    flame.classList.add(
-        "flame-active"
-    );
+    setTimeout(() => {
 
+        stopSmoke();
 
-    const smokeTimer =
-        setInterval(
-            createSmoke,
-            100
-        );
+        /*
+         * Roketi ve alevi gerçekten DOM'dan
+         * görünmez hale getiriyoruz.
+         */
+        rocket.classList.remove("active");
+        rocket.style.display = "none";
 
+        flame.classList.remove("active");
+        flame.style.display = "none";
 
-    setTimeout(
-        function() {
+        createExplosion();
 
-            clearInterval(
-                smokeTimer
-            );
-
-            rocket.classList.remove(
-                "rocket-active"
-            );
-
-            rocket.style.display =
-                "none";
-
-            flame.classList.remove(
-                "flame-active"
-            );
-
-            flame.style.display =
-                "none";
-
-            rocketExplosion();
-
-        },
-        2700
-    );
+    },2500);
 }
 
+/* =====================================================
+   CANVAS
+===================================================== */
+
+const starCanvas = document.getElementById("stars");
+const fxCanvas = document.getElementById("effects");
+
+const starCtx = starCanvas.getContext("2d");
+const fxCtx = fxCanvas.getContext("2d");
+
+let W = window.innerWidth;
+let H = window.innerHeight;
+let dpr = Math.min(window.devicePixelRatio || 1,2);
+
+function resize(){
+
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    dpr = Math.min(window.devicePixelRatio || 1,2);
+
+    starCanvas.width = W*dpr;
+    starCanvas.height = H*dpr;
+
+    fxCanvas.width = W*dpr;
+    fxCanvas.height = H*dpr;
+
+    starCtx.setTransform(dpr,0,0,dpr,0,0);
+    fxCtx.setTransform(dpr,0,0,dpr,0,0);
+}
+
+window.addEventListener("resize",resize);
+resize();
+
+/* =====================================================
+   YILDIZLAR
+===================================================== */
+
+const stars = [];
+
+for(let i=0;i<95;i++){
+
+    stars.push({
+        x:Math.random()*W,
+        y:Math.random()*H,
+        r:.4+Math.random()*1.5,
+        a:.25+Math.random()*.65,
+        speed:.002+Math.random()*.006,
+        phase:Math.random()*Math.PI*2
+    });
+}
+
+function drawStars(time){
+
+    starCtx.clearRect(0,0,W,H);
+
+    for(const s of stars){
+
+        const alpha =
+            s.a +
+            Math.sin(time*s.speed+s.phase)*.18;
+
+        starCtx.beginPath();
+        starCtx.arc(s.x,s.y,s.r,0,Math.PI*2);
+
+        starCtx.fillStyle =
+            `rgba(255,220,245,${Math.max(.08,alpha)})`;
+
+        starCtx.shadowBlur = 6;
+        starCtx.shadowColor = "#ff9ed0";
+
+        starCtx.fill();
+    }
+
+    starCtx.shadowBlur = 0;
+}
+
+/* =====================================================
+   PATLAMA PARÇACIKLARI
+===================================================== */
+
+const particles = [];
+
+function createExplosion(){
+
+    const x = W/2;
+    const y = H*.45;
+
+    /*
+     * Büyük merkez flaşı
+     */
+    particles.push({
+        x:x,
+        y:y,
+        vx:0,
+        vy:0,
+        life:1,
+        size:40,
+        type:"flash"
+    });
+
+    /*
+     * Ateş parçacıkları
+     */
+    for(let i=0;i<48;i++){
+
+        const angle =
+            Math.random()*Math.PI*2;
+
+        const speed =
+            3 + Math.random()*8;
+
+        particles.push({
+            x:x,
+            y:y,
+            vx:Math.cos(angle)*speed,
+            vy:Math.sin(angle)*speed,
+            life:.75+Math.random()*.45,
+            size:2+Math.random()*5,
+            type:"fire"
+        });
+    }
+
+    /*
+     * Beyaz kıvılcımlar
+     */
+    for(let i=0;i<65;i++){
+
+        const angle =
+            Math.random()*Math.PI*2;
+
+        const speed =
+            2+Math.random()*10;
+
+        particles.push({
+            x:x,
+            y:y,
+            vx:Math.cos(angle)*speed,
+            vy:Math.sin(angle)*speed,
+            life:.7+Math.random()*.7,
+            size:1+Math.random()*2.5,
+            type:"spark"
+        });
+    }
+
+    /*
+     * Patlamadan sonra kalp
+     */
+    setTimeout(() => {
+        showHeart();
+    },700);
+}
 
 /* =====================================================
    DUMAN
 ===================================================== */
 
-function createSmoke() {
+let smokeTimer = null;
 
-    if (
-        rocket.style.display ===
-        "none"
-    )
-        return;
+function startSmoke(){
 
+    smokeTimer = setInterval(() => {
 
-    const rect =
-        rocket.getBoundingClientRect();
+        if(rocket.style.display === "none")
+            return;
 
+        const rect =
+            rocket.getBoundingClientRect();
 
-    const smoke =
-        document.createElement(
-            "div"
-        );
+        /*
+         * Canvas parçacığı kullanıyoruz.
+         * Böylece yüzlerce DOM elementi oluşmuyor.
+         */
 
-    smoke.className =
-        "smoke";
+        const smokeCount = 2;
 
+        for(let i=0;i<smokeCount;i++){
 
-    smoke.style.left =
-        (
-            rect.left +
-            rect.width / 2
-        ) + "px";
+            particles.push({
+                x:rect.left+rect.width/2+
+                   (Math.random()-.5)*12,
 
+                y:rect.bottom-8,
 
-    smoke.style.top =
-        (
-            rect.bottom - 15
-        ) + "px";
+                vx:(Math.random()-.5)*.8,
 
+                vy:.8+Math.random()*1.5,
 
-    document.body.appendChild(
-        smoke
-    );
+                life:.45+Math.random()*.35,
 
+                size:6+Math.random()*8,
 
-    setTimeout(
-        function() {
-            smoke.remove();
-        },
-        800
-    );
+                type:"smoke"
+            });
+        }
+
+    },55);
 }
 
+function stopSmoke(){
 
-/* =====================================================
-   PATLAMA
-===================================================== */
+    if(smokeTimer){
 
-function rocketExplosion() {
-
-    screen.classList.add(
-        "shake"
-    );
-
-    setTimeout(
-        function() {
-
-            screen.classList.remove(
-                "shake"
-            );
-
-        },
-        450
-    );
-
-
-    blast.classList.remove(
-        "blast-active"
-    );
-
-    void blast.offsetWidth;
-
-    blast.classList.add(
-        "blast-active"
-    );
-
-
-    /*
-        Önceden:
-        42 + 90 + 10
-
-        Şimdi:
-        20 + 35 + 5
-    */
-
-    for (let i = 0; i < 20; i++) {
-        createFireball();
+        clearInterval(smokeTimer);
+        smokeTimer=null;
     }
-
-    for (let i = 0; i < 35; i++) {
-        createSpark();
-    }
-
-    for (let i = 0; i < 5; i++) {
-        createRocketPiece();
-    }
-
-
-    setTimeout(
-        createHeart,
-        650
-    );
 }
 
-
 /* =====================================================
-   ATEŞ TOPU
+   KALP
 ===================================================== */
 
-function createFireball() {
+const heartParticles = [];
 
-    const ball =
-        document.createElement(
-            "div"
-        );
-
-    ball.className =
-        "fireball";
-
-
-    const angle =
-        Math.random() *
-        Math.PI * 2;
-
-
-    const distance =
-        90 +
-        Math.random() * 260;
-
-
-    ball.style.setProperty(
-        "--x",
-        Math.cos(angle) *
-        distance +
-        "px"
-    );
-
-
-    ball.style.setProperty(
-        "--y",
-        Math.sin(angle) *
-        distance +
-        "px"
-    );
-
-
-    document.body.appendChild(
-        ball
-    );
-
-
-    setTimeout(
-        function() {
-            ball.remove();
-        },
-        1150
-    );
-}
-
-
-/* =====================================================
-   KIVILCIM
-===================================================== */
-
-function createSpark() {
-
-    const spark =
-        document.createElement(
-            "div"
-        );
-
-    spark.className =
-        "spark";
-
-
-    const angle =
-        Math.random() *
-        Math.PI * 2;
-
-
-    const distance =
-        70 +
-        Math.random() * 330;
-
-
-    spark.style.setProperty(
-        "--x",
-        Math.cos(angle) *
-        distance +
-        "px"
-    );
-
-
-    spark.style.setProperty(
-        "--y",
-        Math.sin(angle) *
-        distance +
-        "px"
-    );
-
-
-    document.body.appendChild(
-        spark
-    );
-
-
-    setTimeout(
-        function() {
-            spark.remove();
-        },
-        1250
-    );
-}
-
-
-/* =====================================================
-   ROKET PARÇASI
-===================================================== */
-
-function createRocketPiece() {
-
-    const piece =
-        document.createElement(
-            "div"
-        );
-
-    piece.className =
-        "rocket-piece";
-
-
-    piece.style.width =
-        (
-            6 +
-            Math.random() * 12
-        ) + "px";
-
-
-    piece.style.height =
-        (
-            6 +
-            Math.random() * 12
-        ) + "px";
-
-
-    const angle =
-        Math.random() *
-        Math.PI * 2;
-
-
-    const distance =
-        90 +
-        Math.random() * 220;
-
-
-    piece.style.setProperty(
-        "--x",
-        Math.cos(angle) *
-        distance +
-        "px"
-    );
-
-
-    piece.style.setProperty(
-        "--y",
-        Math.sin(angle) *
-        distance +
-        "px"
-    );
-
-
-    document.body.appendChild(
-        piece
-    );
-
-
-    setTimeout(
-        function() {
-            piece.remove();
-        },
-        1100
-    );
-}
-
-
-/* =====================================================
-   MATEMATİKSEL KALP
-===================================================== */
-
-function heartEquation(t) {
-
-    const x =
-        16 *
-        Math.pow(
-            Math.sin(t),
-            3
-        );
-
-
-    const y =
-        -(
-            13 *
-            Math.cos(t)
-
-            -
-
-            5 *
-            Math.cos(2 * t)
-
-            -
-
-            2 *
-            Math.cos(3 * t)
-
-            -
-
-            Math.cos(4 * t)
-        );
-
+function heartEquation(t){
 
     return {
-        x: x,
-        y: y
+        x:16*Math.pow(Math.sin(t),3),
+
+        y:-(
+            13*Math.cos(t)
+            -5*Math.cos(2*t)
+            -2*Math.cos(3*t)
+            -Math.cos(4*t)
+        )
     };
 }
 
-
-/* =====================================================
-   ANA KALP
-===================================================== */
-
-function createHeart() {
+function showHeart(){
 
     /*
-        180 -> 90 dış kalp
-        180 -> 70 iç kalp
+     * Patlama parçalarını temizle
+     */
+    particles.length = 0;
 
-        Toplam:
-        160 yerine 360
-        daha az kalp
-    */
+    /*
+     * Canvas üzerinde kalp parçacıkları.
+     * Sadece yaklaşık 90 parçacık.
+     */
+    heartParticles.length = 0;
 
-    const amount = 90;
+    const count = 95;
 
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
+    for(let i=0;i<count;i++){
 
         const t =
-            Math.PI * 2 *
-            (i / amount);
+            Math.PI*2*(i/count);
 
+        const p = heartEquation(t);
 
-        const point =
-            heartEquation(t);
+        heartParticles.push({
+            x:W/2,
+            y:H*.45,
 
+            tx:W/2+p.x*11.5,
+            ty:H*.45+p.y*11.5,
 
-        createHeartParticle(
-            point.x * 13,
-            point.y * 13
-        );
+            progress:0,
+
+            size:2+Math.random()*3,
+
+            color:[
+                "#ff174f",
+                "#ff4fa3",
+                "#ff79bd",
+                "#ff1493"
+            ][Math.floor(Math.random()*4)]
+        });
     }
 
+    heartScene.classList.add("show");
 
-    /*
-        Kalbin içi
-    */
+    setTimeout(() => {
 
-    for (
-        let i = 0;
-        i < 70;
-        i++
-    ) {
+        heartText.classList.add("show");
+
+    },650);
+}
+
+/* =====================================================
+   ANA ANİMASYON
+===================================================== */
+
+function animate(time){
+
+    drawStars(time);
+
+    fxCtx.clearRect(0,0,W,H);
+
+    /* PATLAMA */
+
+    for(let i=particles.length-1;i>=0;i--){
+
+        const p = particles[i];
+
+        p.life -= .018;
+
+        if(p.type !== "flash"){
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+            p.vy += .045;
+            p.vx *= .992;
+            p.vy *= .992;
+        }
+
+        if(p.life<=0){
+
+            particles.splice(i,1);
+            continue;
+        }
+
+        if(p.type==="flash"){
+
+            const radius =
+                (1-p.life)*180;
+
+            const gradient =
+                fxCtx.createRadialGradient(
+                    p.x,p.y,0,
+                    p.x,p.y,radius
+                );
+
+            gradient.addColorStop(0,
+                `rgba(255,255,255,${p.life})`);
+
+            gradient.addColorStop(.2,
+                `rgba(255,240,100,${p.life*.8})`);
+
+            gradient.addColorStop(.55,
+                `rgba(255,90,0,${p.life*.35})`);
+
+            gradient.addColorStop(1,
+                "rgba(255,0,0,0)");
+
+            fxCtx.fillStyle=gradient;
+
+            fxCtx.beginPath();
+            fxCtx.arc(p.x,p.y,radius,0,Math.PI*2);
+            fxCtx.fill();
+
+        }else if(p.type==="fire"){
+
+            fxCtx.beginPath();
+            fxCtx.arc(
+                p.x,p.y,
+                p.size*p.life,
+                0,Math.PI*2
+            );
+
+            fxCtx.fillStyle =
+                `rgba(255,${120+Math.random()*100},20,${p.life})`;
+
+            fxCtx.shadowBlur=15;
+            fxCtx.shadowColor="#ff4500";
+
+            fxCtx.fill();
+
+        }else if(p.type==="spark"){
+
+            fxCtx.beginPath();
+            fxCtx.arc(
+                p.x,p.y,
+                p.size*p.life,
+                0,Math.PI*2
+            );
+
+            fxCtx.fillStyle =
+                `rgba(255,255,230,${p.life})`;
+
+            fxCtx.shadowBlur=10;
+            fxCtx.shadowColor="#fff";
+
+            fxCtx.fill();
+
+        }else if(p.type==="smoke"){
+
+            fxCtx.beginPath();
+            fxCtx.arc(
+                p.x,p.y,
+                p.size*(1-p.life+.3),
+                0,Math.PI*2
+            );
+
+            fxCtx.fillStyle =
+                `rgba(180,180,190,${p.life*.25})`;
+
+            fxCtx.shadowBlur=12;
+            fxCtx.shadowColor="#aaa";
+
+            fxCtx.fill();
+        }
+    }
+
+    fxCtx.shadowBlur=0;
+
+    /* KALP PARÇACIKLARI */
+
+    for(const p of heartParticles){
+
+        p.progress += .035;
 
         const t =
-            Math.random() *
-            Math.PI * 2;
+            Math.min(p.progress,1);
 
+        /*
+         * Ease-out
+         */
+        const ease =
+            1-Math.pow(1-t,3);
 
-        const point =
-            heartEquation(t);
+        const x =
+            p.x+(p.tx-p.x)*ease;
 
+        const y =
+            p.y+(p.ty-p.y)*ease;
 
-        const inside =
-            Math.random() * .95;
+        const alpha =
+            Math.min(1,t*3);
 
+        fxCtx.beginPath();
 
-        createHeartParticle(
-
-            point.x *
-            13 *
-            inside,
-
-            point.y *
-            13 *
-            inside
-
+        fxCtx.arc(
+            x,
+            y,
+            p.size,
+            0,
+            Math.PI*2
         );
+
+        fxCtx.fillStyle =
+            p.color;
+
+        fxCtx.globalAlpha=alpha;
+
+        fxCtx.shadowBlur=10;
+        fxCtx.shadowColor="#ff1493";
+
+        fxCtx.fill();
+
+        fxCtx.globalAlpha=1;
     }
 
+    fxCtx.shadowBlur=0;
 
-    /*
-        Büyük kalp
-    */
-
-    setTimeout(
-        function() {
-
-            bigHeart.classList.add(
-                "big-heart-active"
-            );
-
-        },
-        900
-    );
-
-
-    /*
-        İç kalp
-    */
-
-    setTimeout(
-        function() {
-
-            const innerHeart =
-                document.getElementById(
-                    "innerHeart"
-                );
-
-
-            const glow =
-                document.getElementById(
-                    "heartGlow"
-                );
-
-
-            innerHeart.classList.add(
-                "inner-heart-active"
-            );
-
-
-            glow.classList.add(
-                "active"
-            );
-
-
-            createLightParticles(20);
-
-        },
-        1700
-    );
-
-
-    /*
-        Kalp atışları
-    */
-
-    setTimeout(
-        pulseHeart,
-        2800
-    );
-
-    setTimeout(
-        pulseHeart,
-        3500
-    );
-
-    setTimeout(
-        pulseHeart,
-        4200
-    );
-
-
-    /*
-        Final yazısı
-    */
-
-    setTimeout(
-        function() {
-
-            const finalText =
-                document.createElement(
-                    "div"
-                );
-
-
-            finalText.id =
-                "finalMessage";
-
-
-            finalText.innerHTML = `
-
-                <div class="final-main">
-                    Seni çok seviyorum Pampim ❤️
-                </div>
-
-            `;
-
-
-            document.body.appendChild(
-                finalText
-            );
-
-        },
-        3000
-    );
-
-
-    /*
-        Uçan kalpler
-    */
-
-    setTimeout(
-        startFloatingHearts,
-        3200
-    );
+    requestAnimationFrame(animate);
 }
 
-
-/* =====================================================
-   KALP PARÇACIĞI
-===================================================== */
-
-function createHeartParticle(x, y) {
-
-    const heart =
-        document.createElement(
-            "div"
-        );
-
-
-    heart.className =
-        "heart";
-
-
-    const symbols = [
-        "❤️",
-        "💖",
-        "💗",
-        "💕",
-        "💓"
-    ];
-
-
-    heart.textContent =
-        symbols[
-            Math.floor(
-                Math.random() *
-                symbols.length
-            )
-        ];
-
-
-    heart.style.setProperty(
-        "--x",
-        x + "px"
-    );
-
-
-    heart.style.setProperty(
-        "--y",
-        y + "px"
-    );
-
-
-    heart.style.setProperty(
-        "--scale",
-        (
-            .4 +
-            Math.random() * .6
-        )
-    );
-
-
-    heart.style.animationDelay =
-        (
-            Math.random() * .2
-        ) + "s";
-
-
-    heartLayer.appendChild(
-        heart
-    );
-
-
-    setTimeout(
-        function() {
-            heart.remove();
-        },
-        2800
-    );
-}
-
-
-/* =====================================================
-   KALP ATIŞI
-===================================================== */
-
-function pulseHeart() {
-
-    const innerHeart =
-        document.getElementById(
-            "innerHeart"
-        );
-
-
-    if (!innerHeart)
-        return;
-
-
-    innerHeart.classList.remove(
-        "inner-heart-pulse"
-    );
-
-
-    void innerHeart.offsetWidth;
-
-
-    innerHeart.classList.add(
-        "inner-heart-pulse"
-    );
-
-
-    createLightParticles(8);
-}
-
-
-/* =====================================================
-   IŞIK PARÇACIKLARI
-===================================================== */
-
-function createLightParticles(amount) {
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        const particle =
-            document.createElement(
-                "div"
-            );
-
-
-        particle.className =
-            "light-particle";
-
-
-        const angle =
-            Math.random() *
-            Math.PI * 2;
-
-
-        const distance =
-            60 +
-            Math.random() * 160;
-
-
-        particle.style.setProperty(
-            "--x",
-            Math.cos(angle) *
-            distance +
-            "px"
-        );
-
-
-        particle.style.setProperty(
-            "--y",
-            Math.sin(angle) *
-            distance +
-            "px"
-        );
-
-
-        particle.style.animationDelay =
-            (
-                Math.random() * .25
-            ) + "s";
-
-
-        document.body.appendChild(
-            particle
-        );
-
-
-        setTimeout(
-            function() {
-                particle.remove();
-            },
-            1700
-        );
-    }
-}
-
-
-/* =====================================================
-   UÇAN KALPLER
-===================================================== */
-
-function startFloatingHearts() {
-
-    let count = 0;
-
-
-    const timer =
-        setInterval(
-            function() {
-
-                createFloatingHeart();
-
-                count++;
-
-
-                if (count >= 7) {
-
-                    clearInterval(
-                        timer
-                    );
-
-                }
-
-            },
-            600
-        );
-}
-
-
-/* =====================================================
-   TEK UÇAN KALP
-===================================================== */
-
-function createFloatingHeart() {
-
-    const heart =
-        document.createElement(
-            "div"
-        );
-
-
-    heart.className =
-        "floating-heart";
-
-
-    heart.textContent =
-        Math.random() > .5
-        ? "❤️"
-        : "💗";
-
-
-    heart.style.left =
-        (
-            5 +
-            Math.random() * 90
-        ) + "vw";
-
-
-    heart.style.setProperty(
-        "--size",
-        (
-            12 +
-            Math.random() * 18
-        ) + "px"
-    );
-
-
-    heart.style.setProperty(
-        "--duration",
-        (
-            4 +
-            Math.random() * 3
-        ) + "s"
-    );
-
-
-    heart.style.setProperty(
-        "--drift",
-        (
-            -70 +
-            Math.random() * 140
-        ) + "px"
-    );
-
-
-    document.body.appendChild(
-        heart
-    );
-
-
-    setTimeout(
-        function() {
-            heart.remove();
-        },
-        7500
-    );
-}
-
+requestAnimationFrame(animate);
 </script>
 
 </body>

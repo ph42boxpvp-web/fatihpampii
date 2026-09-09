@@ -171,8 +171,6 @@ body {
 }
 
 
-/* Roket gövdesi */
-
 .rocket-body {
 
     position: absolute;
@@ -205,8 +203,6 @@ body {
 }
 
 
-/* Roket burnu */
-
 .rocket-nose {
 
     position: absolute;
@@ -233,8 +229,6 @@ body {
         );
 }
 
-
-/* Roket camı */
 
 .rocket-window {
 
@@ -267,8 +261,6 @@ body {
 }
 
 
-/* Roket çizgisi */
-
 .rocket-line {
 
     position: absolute;
@@ -283,8 +275,6 @@ body {
         #ff164d;
 }
 
-
-/* Kanatlar */
 
 .rocket-wing {
 
@@ -337,8 +327,6 @@ body {
         );
 }
 
-
-/* Motor */
 
 .rocket-engine {
 
@@ -565,7 +553,7 @@ body {
 
 
 /* =====================================================
-   ANA PATLAMA
+   PATLAMA
 ===================================================== */
 
 #blast {
@@ -750,7 +738,7 @@ body {
 
 
 /* =====================================================
-   KIVILCIMLAR
+   KIVILCIM
 ===================================================== */
 
 .spark {
@@ -937,7 +925,7 @@ body {
 
 
 /* =====================================================
-   ARKA SİLİK BÜYÜK KALP
+   BÜYÜK SİLİK KALP
 ===================================================== */
 
 #bigHeart {
@@ -969,10 +957,6 @@ body {
     pointer-events: none;
 }
 
-
-/*
-    Büyük silik kalbin kendisi
-*/
 
 #bigHeart::before {
 
@@ -1058,7 +1042,7 @@ body {
 
 
 /* =====================================================
-   İÇİNDEN ÇIKAN KALP
+   İÇ KALP
 ===================================================== */
 
 #innerHeart {
@@ -1171,7 +1155,66 @@ body {
 
 
 /* =====================================================
-   KALP NABIZ HALKALARI
+   YENİ: GERÇEK KALP ATIŞI
+===================================================== */
+
+.inner-heart-pulse {
+
+    animation:
+        heartPulse
+        .65s
+        ease-in-out;
+}
+
+
+@keyframes heartPulse {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    20% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.18);
+    }
+
+    38% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.94);
+    }
+
+    55% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+    }
+
+    75% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.98);
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   NABIZ HALKALARI
 ===================================================== */
 
 .heart-ring {
@@ -1323,7 +1366,146 @@ body {
 
 
 /* =====================================================
-   SON YAZI
+   YENİ: KALPTEN ÇIKAN IŞIK PARÇACIKLARI
+===================================================== */
+
+.light-particle {
+
+    position: fixed;
+
+    left: 50%;
+    top: 43%;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        white;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 18px #ff4fa3,
+        0 0 30px #ff1493;
+
+    z-index: 125;
+
+    pointer-events: none;
+
+    animation:
+        lightFly
+        1.5s
+        ease-out
+        forwards;
+}
+
+
+@keyframes lightFly {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.2);
+
+        opacity: 0;
+    }
+
+    15% {
+
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(.05);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   YENİ: YUKARI UÇAN KÜÇÜK KALPLER
+===================================================== */
+
+.floating-heart {
+
+    position: fixed;
+
+    bottom: -40px;
+
+    font-size:
+        var(--size);
+
+    color:
+        #ff4fa3;
+
+    opacity: 0;
+
+    z-index: 95;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(0 0 8px #ff1493);
+
+    animation:
+        floatHeart
+        var(--duration)
+        linear
+        forwards;
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+
+        transform:
+            translateX(0)
+            translateY(0)
+            rotate(0deg)
+            scale(.5);
+
+        opacity: 0;
+    }
+
+    15% {
+
+        opacity: .8;
+    }
+
+    50% {
+
+        transform:
+            translateX(var(--drift))
+            translateY(-50vh)
+            rotate(25deg)
+            scale(1);
+    }
+
+    100% {
+
+        transform:
+            translateX(calc(var(--drift) * -1))
+            translateY(-115vh)
+            rotate(-25deg)
+            scale(.7);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   FINAL YAZISI
 ===================================================== */
 
 #finalMessage {
@@ -1331,9 +1513,9 @@ body {
     position: fixed;
 
     left: 50%;
-    top: 80%;
+    top: 77%;
 
-    width: 90%;
+    width: 92%;
 
     transform:
         translateX(-50%);
@@ -1342,6 +1524,18 @@ body {
 
     text-align: center;
 
+    opacity: 0;
+
+    animation:
+        finalText
+        1.2s
+        ease
+        forwards;
+}
+
+
+.final-main {
+
     font-size:
         clamp(25px, 6vw, 50px);
 
@@ -1349,18 +1543,34 @@ body {
 
     color: white;
 
-    opacity: 0;
-
     text-shadow:
         0 0 10px #ff4fa3,
         0 0 30px #ff1493,
         0 0 60px #ff1493;
+}
+
+
+.final-pampim {
+
+    margin-top: 12px;
+
+    font-size:
+        clamp(20px, 5vw, 34px);
+
+    color:
+        #ffb6da;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px #ff1493,
+        0 0 25px #ff1493;
 
     animation:
-        finalText
-        1.2s
-        ease
-        forwards;
+        pampimGlow
+        1.3s
+        ease-in-out
+        infinite alternate;
 }
 
 
@@ -1382,6 +1592,29 @@ body {
         transform:
             translateX(-50%)
             translateY(0);
+    }
+}
+
+
+@keyframes pampimGlow {
+
+    from {
+
+        transform:
+            scale(1);
+
+        text-shadow:
+            0 0 8px #ff1493;
+    }
+
+    to {
+
+        transform:
+            scale(1.05);
+
+        text-shadow:
+            0 0 15px #ff1493,
+            0 0 35px #ff1493;
     }
 }
 
@@ -1530,8 +1763,6 @@ body {
 </div>
 
 
-<!-- Roket ateşi -->
-
 <div id="flame">
 
     <div class="flame-core"></div>
@@ -1539,29 +1770,19 @@ body {
 </div>
 
 
-<!-- Patlama -->
-
 <div id="blast"></div>
 
-
-<!-- Kalp parçacıkları -->
 
 <div id="heartLayer"></div>
 
 
-<!-- Silik büyük kalp -->
-
 <div id="bigHeart"></div>
 
-
-<!-- İçinden çıkan kalp -->
 
 <div id="innerHeart">
     ❤️
 </div>
 
-
-<!-- Kalp ışığı -->
 
 <div class="heart-glow"
      id="heartGlow">
@@ -1640,7 +1861,8 @@ screen.addEventListener(
 
 
             /*
-                PAMPİM ÖZEL
+                PAMPİM GELDİĞİ ANDA
+                GERİ SAYIM BAŞLIYOR
             */
 
             if (
@@ -1668,11 +1890,6 @@ screen.addEventListener(
 
                 step++;
 
-
-                /*
-                    PAMPİM GELDİĞİ
-                    ANDA SAYIM BAŞLIYOR
-                */
 
                 startCountdown();
 
@@ -1745,7 +1962,6 @@ function startCountdown() {
 
                 }
 
-
                 else {
 
 
@@ -1770,7 +1986,7 @@ function startCountdown() {
 
 
 /* =====================================================
-   ROKET FIRLAT
+   ROKET
 ===================================================== */
 
 function launchRocket() {
@@ -1789,38 +2005,18 @@ function launchRocket() {
     );
 
 
-    /*
-        Roket uçarken duman
-    */
-
     const smokeTimer =
         setInterval(
             function() {
 
 
-                if (
-                    rocket.style.display ===
-                    "none"
-                ) {
-
-                    clearInterval(
-                        smokeTimer
-                    );
-
-                    return;
-                }
-
-
                 createSmoke();
+
 
             },
             65
         );
 
-
-    /*
-        Roket hedefe ulaştığında patlıyor
-    */
 
     setTimeout(
         function() {
@@ -1832,7 +2028,7 @@ function launchRocket() {
 
 
             /*
-                ROKET YOK OLUYOR
+                ROKET TAMAMEN YOK
             */
 
             rocket.classList.remove(
@@ -1851,10 +2047,6 @@ function launchRocket() {
                 "none";
 
 
-            /*
-                PATLAMA
-            */
-
             rocketExplosion();
 
 
@@ -1869,6 +2061,13 @@ function launchRocket() {
 ===================================================== */
 
 function createSmoke() {
+
+
+    if (
+        rocket.style.display ===
+        "none"
+    )
+        return;
 
 
     const rect =
@@ -1921,10 +2120,6 @@ function createSmoke() {
 function rocketExplosion() {
 
 
-    /*
-        Ekranı sars
-    */
-
     screen.classList.add(
         "shake"
     );
@@ -1942,10 +2137,6 @@ function rocketExplosion() {
     );
 
 
-    /*
-        Ana ateş topu
-    */
-
     blast.classList.remove(
         "blast-active"
     );
@@ -1959,10 +2150,6 @@ function rocketExplosion() {
     );
 
 
-    /*
-        Ateş topları
-    */
-
     for (
         let i = 0;
         i < 42;
@@ -1974,10 +2161,6 @@ function rocketExplosion() {
     }
 
 
-    /*
-        Kıvılcımlar
-    */
-
     for (
         let i = 0;
         i < 90;
@@ -1988,10 +2171,6 @@ function rocketExplosion() {
 
     }
 
-
-    /*
-        Roket parçaları
-    */
 
     for (
         let i = 0;
@@ -2005,7 +2184,7 @@ function rocketExplosion() {
 
 
     /*
-        Patlamadan sonra kalp
+        KALP
     */
 
     setTimeout(
@@ -2217,19 +2396,6 @@ function createRocketPiece() {
 function heartEquation(t) {
 
 
-    /*
-        Kalp denklemi:
-
-        x = 16 sin³(t)
-
-        y =
-        13cos(t)
-        -5cos(2t)
-        -2cos(3t)
-        -cos(4t)
-    */
-
-
     const x =
         16 *
         Math.pow(
@@ -2268,18 +2434,18 @@ function heartEquation(t) {
 
 
 /* =====================================================
-   KALP OLUŞTUR
+   ANA KALP
 ===================================================== */
 
 function createHeart() {
 
 
-    /*
-        Kalbin dış çizgisi
-    */
-
     const amount = 180;
 
+
+    /*
+        DIŞ KALP
+    */
 
     for (
         let i = 0;
@@ -2307,7 +2473,7 @@ function createHeart() {
 
 
     /*
-        Kalbin içini doldur
+        KALBİN İÇİ
     */
 
     for (
@@ -2348,9 +2514,7 @@ function createHeart() {
 
 
     /*
-        =================================
         SİLİK BÜYÜK KALP
-        =================================
     */
 
     setTimeout(
@@ -2368,9 +2532,7 @@ function createHeart() {
 
 
     /*
-        =================================
-        İÇ KALP ÇIKIYOR
-        =================================
+        İÇ KALP
     */
 
     setTimeout(
@@ -2402,19 +2564,70 @@ function createHeart() {
             createHeartRing();
 
 
+            /*
+                İÇ KALPTEN IŞIK SAÇ
+            */
+
+            createLightParticles(
+                35
+            );
+
+
         },
         1700
     );
 
 
     /*
-        İKİNCİ NABIZ
+        1. KALP ATIŞI
     */
 
     setTimeout(
         function() {
 
-            createHeartRing();
+            pulseHeart();
+
+        },
+        2800
+    );
+
+
+    /*
+        2. KALP ATIŞI
+    */
+
+    setTimeout(
+        function() {
+
+            pulseHeart();
+
+        },
+        3500
+    );
+
+
+    /*
+        3. KALP ATIŞI
+    */
+
+    setTimeout(
+        function() {
+
+            pulseHeart();
+
+        },
+        4200
+    );
+
+
+    /*
+        UÇAN KALPLER
+    */
+
+    setTimeout(
+        function() {
+
+            startFloatingHearts();
 
         },
         2500
@@ -2422,21 +2635,7 @@ function createHeart() {
 
 
     /*
-        ÜÇÜNCÜ NABIZ
-    */
-
-    setTimeout(
-        function() {
-
-            createHeartRing();
-
-        },
-        3300
-    );
-
-
-    /*
-        SON YAZI
+        FINAL YAZISI
     */
 
     setTimeout(
@@ -2453,8 +2652,17 @@ function createHeart() {
                 "finalMessage";
 
 
-            finalText.innerHTML =
-                "Seni çok seviyorum Fatih ❤️";
+            finalText.innerHTML = `
+
+                <div class="final-main">
+                    Seni çok seviyorum Fatih ❤️
+                </div>
+
+                <div class="final-pampim">
+                    Pampimmmmmmm 🥹❤️
+                </div>
+
+            `;
 
 
             document.body.appendChild(
@@ -2463,7 +2671,7 @@ function createHeart() {
 
 
         },
-        3900
+        4600
     );
 }
 
@@ -2553,6 +2761,249 @@ function createHeartParticle(
 
 
 /* =====================================================
+   KALP ATIŞI
+===================================================== */
+
+function pulseHeart() {
+
+
+    const innerHeart =
+        document.getElementById(
+            "innerHeart"
+        );
+
+
+    if (!innerHeart)
+        return;
+
+
+    /*
+        Animasyonu sıfırla
+    */
+
+    innerHeart.classList.remove(
+        "inner-heart-pulse"
+    );
+
+
+    void innerHeart.offsetWidth;
+
+
+    /*
+        Kalp atışı
+    */
+
+    innerHeart.classList.add(
+        "inner-heart-pulse"
+    );
+
+
+    /*
+        Aynı anda ışık halkası
+    */
+
+    createHeartRing();
+
+
+    /*
+        Her atışta biraz ışık
+    */
+
+    createLightParticles(
+        15
+    );
+}
+
+
+/* =====================================================
+   IŞIK PARÇACIKLARI
+===================================================== */
+
+function createLightParticles(
+    amount
+) {
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+
+        const particle =
+            document.createElement(
+                "div"
+            );
+
+
+        particle.className =
+            "light-particle";
+
+
+        const angle =
+            Math.random() *
+            Math.PI * 2;
+
+
+        const distance =
+            70 +
+            Math.random() * 190;
+
+
+        particle.style.setProperty(
+            "--x",
+            Math.cos(angle) *
+            distance +
+            "px"
+        );
+
+
+        particle.style.setProperty(
+            "--y",
+            Math.sin(angle) *
+            distance +
+            "px"
+        );
+
+
+        particle.style.animationDelay =
+            (
+                Math.random() * .3
+            ) + "s";
+
+
+        document.body.appendChild(
+            particle
+        );
+
+
+        setTimeout(
+            function() {
+
+                particle.remove();
+
+            },
+            1800
+        );
+    }
+}
+
+
+/* =====================================================
+   YÜKSELEN KÜÇÜK KALPLER
+===================================================== */
+
+function startFloatingHearts() {
+
+
+    /*
+        Sürekli yeni kalpler
+    */
+
+    let count = 0;
+
+
+    const timer =
+        setInterval(
+            function() {
+
+
+                createFloatingHeart();
+
+
+                count++;
+
+
+                if (count >= 18) {
+
+                    clearInterval(
+                        timer
+                    );
+
+                }
+
+
+            },
+            280
+        );
+}
+
+
+/* =====================================================
+   TEK UÇAN KALP
+===================================================== */
+
+function createFloatingHeart() {
+
+
+    const heart =
+        document.createElement(
+            "div"
+        );
+
+
+    heart.className =
+        "floating-heart";
+
+
+    heart.innerHTML =
+        Math.random() > .5
+        ? "❤️"
+        : "💗";
+
+
+    heart.style.left =
+        (
+            5 +
+            Math.random() * 90
+        ) + "vw";
+
+
+    heart.style.setProperty(
+        "--size",
+        (
+            12 +
+            Math.random() * 22
+        ) + "px"
+    );
+
+
+    heart.style.setProperty(
+        "--duration",
+        (
+            4 +
+            Math.random() * 3
+        ) + "s"
+    );
+
+
+    heart.style.setProperty(
+        "--drift",
+        (
+            -80 +
+            Math.random() * 160
+        ) + "px"
+    );
+
+
+    document.body.appendChild(
+        heart
+    );
+
+
+    setTimeout(
+        function() {
+
+            heart.remove();
+
+        },
+        7500
+    );
+}
+
+
+/* =====================================================
    NABIZ HALKASI
 ===================================================== */
 
@@ -2583,6 +3034,7 @@ function createHeartRing() {
         1500
     );
 }
+
 
 </script>
 

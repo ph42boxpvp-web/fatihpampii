@@ -31,7 +31,6 @@ body{
     font-family:Arial,sans-serif;
 }
 
-
 /* =========================================================
    YILDIZLI ARKA PLAN
 ========================================================= */
@@ -59,12 +58,12 @@ body{
         opacity:.15;
         transform:scale(.6);
     }
+
     50%{
         opacity:1;
         transform:scale(1.5);
     }
 }
-
 
 /* =========================================================
    ANA EKRAN
@@ -79,7 +78,6 @@ body{
     align-items:center;
 
     text-align:center;
-
     cursor:pointer;
 
     z-index:10;
@@ -88,7 +86,6 @@ body{
 #content{
     position:relative;
     z-index:20;
-
     width:100%;
     padding:25px;
 }
@@ -152,9 +149,8 @@ body{
     }
 }
 
-
 /* =========================================================
-   PAMPİM + SAYIM
+   PAMPİM + GERİ SAYIM
 ========================================================= */
 
 #pampimBox{
@@ -197,7 +193,6 @@ body{
         filter:blur(0);
     }
 }
-
 
 /* =========================================================
    ROKET
@@ -451,7 +446,6 @@ body{
     }
 }
 
-
 /* =========================================================
    ROKET ALEVİ
 ========================================================= */
@@ -540,6 +534,7 @@ body{
 }
 
 @keyframes flameShake{
+
     from{
         transform:
             translateX(-50%)
@@ -553,7 +548,6 @@ body{
             scaleX(1.12);
     }
 }
-
 
 /* =========================================================
    DUMAN
@@ -589,6 +583,7 @@ body{
 }
 
 @keyframes smokeUp{
+
     0%{
         opacity:.65;
         transform:scale(.4);
@@ -596,6 +591,7 @@ body{
 
     100%{
         opacity:0;
+
         transform:
             translate(
                 var(--sx),
@@ -604,7 +600,6 @@ body{
             scale(3);
     }
 }
-
 
 /* =========================================================
    PATLAMA FLASH
@@ -687,7 +682,6 @@ body{
     }
 }
 
-
 /* =========================================================
    PATLAMA PARÇACIKLARI
 ========================================================= */
@@ -699,7 +693,6 @@ body{
     top:42%;
 
     pointer-events:none;
-
     z-index:82;
 
     border-radius:50%;
@@ -737,7 +730,6 @@ body{
     }
 }
 
-
 /* =========================================================
    KALP SAHNESİ
 ========================================================= */
@@ -751,9 +743,8 @@ body{
     z-index:90;
 }
 
-
 /* =========================================================
-   KALP NOKTALARI
+   KALP PARÇACIKLARI
 ========================================================= */
 
 .heartParticle{
@@ -805,7 +796,6 @@ body{
     }
 }
 
-
 /* =========================================================
    BÜYÜK NEON KALP
 ========================================================= */
@@ -841,8 +831,7 @@ body{
     align-items:center;
     justify-content:center;
 
-    font-size:
-        min(72vw,360px);
+    font-size:min(72vw,360px);
 
     line-height:1;
 
@@ -903,6 +892,55 @@ body{
     }
 }
 
+/* =========================================================
+   İLK KALP ATIŞI
+========================================================= */
+
+#megaHeart.heartBeat{
+    animation:
+        heartBeat
+        .8s
+        cubic-bezier(.17,.67,.35,1.35);
+}
+
+@keyframes heartBeat{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    18%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.16);
+    }
+
+    36%{
+        transform:
+            translate(-50%,-50%)
+            scale(.94);
+    }
+
+    55%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.08);
+    }
+
+    72%{
+        transform:
+            translate(-50%,-50%)
+            scale(.98);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+}
 
 /* =========================================================
    İÇTEN DOĞAN KALP
@@ -993,19 +1031,18 @@ body{
     }
 }
 
-
 /* =========================================================
-   KALP ATIŞI
+   İÇ KALP ATIŞI
 ========================================================= */
 
-.pulse{
+.innerPulse{
     animation:
-        pulseHeart
-        .7s
-        ease-in-out;
+        innerHeartBeat
+        .75s
+        cubic-bezier(.17,.67,.35,1.35);
 }
 
-@keyframes pulseHeart{
+@keyframes innerHeartBeat{
 
     0%{
         transform:
@@ -1013,22 +1050,28 @@ body{
             scale(1);
     }
 
-    25%{
+    20%{
         transform:
             translate(-50%,-50%)
-            scale(1.22);
+            scale(1.24);
     }
 
-    45%{
+    40%{
         transform:
             translate(-50%,-50%)
-            scale(.94);
+            scale(.91);
     }
 
-    65%{
+    58%{
         transform:
             translate(-50%,-50%)
-            scale(1.1);
+            scale(1.12);
+    }
+
+    75%{
+        transform:
+            translate(-50%,-50%)
+            scale(.97);
     }
 
     100%{
@@ -1038,9 +1081,8 @@ body{
     }
 }
 
-
 /* =========================================================
-   KALP HALKASI
+   HALKA
 ========================================================= */
 
 .ring{
@@ -1097,9 +1139,8 @@ body{
     }
 }
 
-
 /* =========================================================
-   PARILTI NOKTALARI
+   PARILTI
 ========================================================= */
 
 .sparkle{
@@ -1156,85 +1197,6 @@ body{
         opacity:0;
     }
 }
-
-
-/* =========================================================
-   UÇAN KÜÇÜK KALPLER
-========================================================= */
-
-.floatingHeart{
-    position:fixed;
-
-    bottom:-40px;
-
-    left:var(--left);
-
-    font-size:var(--size);
-
-    opacity:0;
-
-    z-index:110;
-
-    pointer-events:none;
-
-    filter:
-        drop-shadow(0 0 6px #ff1493)
-        drop-shadow(0 0 12px #ff1493);
-
-    animation:
-        floatUp
-        var(--duration)
-        cubic-bezier(.15,.6,.2,1)
-        forwards;
-}
-
-@keyframes floatUp{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translate3d(0,0,0)
-            scale(.35);
-    }
-
-    12%{
-        opacity:.95;
-    }
-
-    45%{
-        transform:
-            translate3d(
-                var(--drift),
-                -50vh,
-                0
-            )
-            scale(1);
-    }
-
-    75%{
-        transform:
-            translate3d(
-                var(--drift2),
-                -82vh,
-                0
-            )
-            scale(.9);
-    }
-
-    100%{
-        transform:
-            translate3d(
-                var(--drift3),
-                -118vh,
-                0
-            )
-            scale(.55);
-
-        opacity:0;
-    }
-}
-
 
 /* =========================================================
    SON YAZI
@@ -1321,18 +1283,19 @@ body{
 
     from{
         transform:scale(1);
+
         text-shadow:
             0 0 8px #ff1493;
     }
 
     to{
         transform:scale(1.05);
+
         text-shadow:
             0 0 12px #ff1493,
             0 0 30px #ff1493;
     }
 }
-
 
 /* =========================================================
    EKRAN SARSINTISI
@@ -1375,20 +1338,9 @@ body{
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =========================================================
-     YILDIZLAR
-========================================================= -->
-
 <div id="stars"></div>
-
-
-<!-- =========================================================
-     ANA EKRAN
-========================================================= -->
 
 <div id="screen">
 
@@ -1402,10 +1354,7 @@ body{
 
 </div>
 
-
-<!-- =========================================================
-     ROKET
-========================================================= -->
+<!-- ROKET -->
 
 <div id="rocket">
 
@@ -1426,10 +1375,7 @@ body{
 
 </div>
 
-
-<!-- =========================================================
-     ALEV
-========================================================= -->
+<!-- ALEV -->
 
 <div id="flame">
 
@@ -1438,17 +1384,11 @@ body{
 
 </div>
 
-
-<!-- =========================================================
-     PATLAMA
-========================================================= -->
+<!-- PATLAMA -->
 
 <div id="flash"></div>
 
-
-<!-- =========================================================
-     KALP SAHNESİ
-========================================================= -->
+<!-- KALP -->
 
 <div id="heartScene"></div>
 
@@ -1495,7 +1435,7 @@ let finished = false;
 
 
 /* =========================================================
-   YILDIZLARI OLUŞTUR
+   YILDIZLAR
 ========================================================= */
 
 function createStars(){
@@ -1555,7 +1495,7 @@ const messages = [
 
 
 /* =========================================================
-   EKRANA TIKLAMA
+   TIKLAMA
 ========================================================= */
 
 screen.addEventListener(
@@ -1567,9 +1507,8 @@ screen.addEventListener(
 
 
         /*
-           Son mesaj:
-           Pampim ekrana geldiği anda
-           geri sayım başlar.
+           PAMPİM GELDİĞİ ANDA
+           GERİ SAYIM BAŞLIYOR.
         */
 
         if(step === messages.length - 1){
@@ -1682,22 +1621,12 @@ function launchRocket(){
     );
 
 
-    /*
-       Duman sürekli oluşuyor.
-    */
-
     const smokeTimer =
         setInterval(
             createSmoke,
             65
         );
 
-
-    /*
-       Roket tam yukarı vardığında
-       patlıyor ve DOM'dan tamamen
-       görünmez oluyor.
-    */
 
     setTimeout(
         function(){
@@ -1706,6 +1635,10 @@ function launchRocket(){
                 smokeTimer
             );
 
+
+            /*
+               ROKET TAMAMEN YOK OLUYOR.
+            */
 
             rocket.classList.remove(
                 "rocketActive"
@@ -1821,7 +1754,7 @@ function explode(){
 
 
     /*
-       Büyük turuncu / sarı patlama
+       Büyük patlama
     */
 
     for(let i=0;i<55;i++){
@@ -1832,7 +1765,7 @@ function explode(){
 
 
     /*
-       İnce hızlı kıvılcımlar
+       Kıvılcımlar
     */
 
     for(let i=0;i<100;i++){
@@ -1902,10 +1835,6 @@ function createExplosionParticle(){
                 colors.length
             )
         ];
-
-
-    p.style.boxShadow =
-        "0 0 10px currentColor";
 
 
     p.style.setProperty(
@@ -1979,7 +1908,7 @@ function createSpark(){
 
 
 /* =========================================================
-   KALP DENKLEMİ
+   MATEMATİKSEL KALP
 ========================================================= */
 
 function heartPoint(t){
@@ -2015,17 +1944,10 @@ function heartPoint(t){
 
 
 /* =========================================================
-   KALBİ OLUŞTUR
+   KALP OLUŞUMU
 ========================================================= */
 
 function createHeart(){
-
-    const centerX =
-        window.innerWidth/2;
-
-    const centerY =
-        window.innerHeight*.42;
-
 
     /*
        DIŞ KALP
@@ -2057,7 +1979,7 @@ function createHeart(){
 
 
     /*
-       İÇ DOLGU
+       KALBİN İÇ DOLGUSU
     */
 
     for(
@@ -2075,10 +1997,6 @@ function createHeart(){
             heartPoint(t);
 
 
-        /*
-           Kalbin içine dağıt.
-        */
-
         const scale =
             .15 +
             Math.random()*.82;
@@ -2092,7 +2010,7 @@ function createHeart(){
 
 
     /*
-       Arkadaki büyük neon kalp.
+       Büyük silik neon kalp.
     */
 
     setTimeout(
@@ -2106,7 +2024,34 @@ function createHeart(){
 
 
     /*
-       İçinden yeni kalp doğuyor.
+       İLK KALP ATIŞI.
+
+       Büyük kalp oluşurken
+       yumuşak bir şekilde atıyor.
+    */
+
+    setTimeout(
+        ()=>{
+            heartBeat();
+
+            setTimeout(
+                heartBeat,
+                700
+            );
+
+            setTimeout(
+                heartBeat,
+                1400
+            );
+
+        },
+        1200
+    );
+
+
+    /*
+       Kalbin içinden
+       ikinci kalp çıkıyor.
     */
 
     setTimeout(
@@ -2120,37 +2065,30 @@ function createHeart(){
             createSparkleBurst(35);
 
         },
-        1600
+        2200
     );
 
 
     /*
-       Kalp atışları.
+       İç kalp de atıyor.
     */
 
     setTimeout(
-        pulse,
-        2700
-    );
+        ()=>{
+            innerHeartBeat();
 
-    setTimeout(
-        pulse,
-        3400
-    );
+            setTimeout(
+                innerHeartBeat,
+                800
+            );
 
-    setTimeout(
-        pulse,
-        4100
-    );
+            setTimeout(
+                innerHeartBeat,
+                1600
+            );
 
-
-    /*
-       Küçük kalpler.
-    */
-
-    setTimeout(
-        floatingHearts,
-        2500
+        },
+        4300
     );
 
 
@@ -2160,7 +2098,7 @@ function createHeart(){
 
     setTimeout(
         showFinalText,
-        4700
+        5600
     );
 }
 
@@ -2241,19 +2179,46 @@ function createHeartParticle(
 
 
 /* =========================================================
+   BÜYÜK KALP ATIŞI
+========================================================= */
+
+function heartBeat(){
+
+    megaHeart.classList.remove(
+        "heartBeat"
+    );
+
+    void megaHeart.offsetWidth;
+
+    megaHeart.classList.add(
+        "heartBeat"
+    );
+
+
+    /*
+       Her atışta hafif ışık halkası.
+    */
+
+    createRing();
+
+    createSparkleBurst(10);
+}
+
+
+/* =========================================================
    İÇ KALP ATIŞI
 ========================================================= */
 
-function pulse(){
+function innerHeartBeat(){
 
     innerHeart.classList.remove(
-        "pulse"
+        "innerPulse"
     );
 
     void innerHeart.offsetWidth;
 
     innerHeart.classList.add(
-        "pulse"
+        "innerPulse"
     );
 
 
@@ -2277,7 +2242,9 @@ function createRing(){
         "ring";
 
 
-    document.body.appendChild(ring);
+    document.body.appendChild(
+        ring
+    );
 
 
     setTimeout(
@@ -2290,7 +2257,7 @@ function createRing(){
 
 
 /* =========================================================
-   IŞIK PATLAMASI
+   IŞIK PARÇACIKLARI
 ========================================================= */
 
 function createSparkleBurst(
@@ -2353,137 +2320,7 @@ function createSparkleBurst(
 
 
 /* =========================================================
-   KÜÇÜK KALPLER
-========================================================= */
-
-function floatingHearts(){
-
-    let count = 0;
-
-
-    const timer =
-        setInterval(
-            ()=>{
-                
-                createFloatingHeart();
-
-                count++;
-
-
-                if(count >= 30){
-
-                    clearInterval(
-                        timer
-                    );
-                }
-
-            },
-            240
-        );
-}
-
-
-/* =========================================================
-   UÇAN KALP
-========================================================= */
-
-function createFloatingHeart(){
-
-    const heart =
-        document.createElement("div");
-
-
-    heart.className =
-        "floatingHeart";
-
-
-    const symbols = [
-        "❤️",
-        "💗",
-        "💖",
-        "💕"
-    ];
-
-
-    heart.innerHTML =
-        symbols[
-            Math.floor(
-                Math.random()*
-                symbols.length
-            )
-        ];
-
-
-    heart.style.setProperty(
-        "--left",
-        (
-            8 +
-            Math.random()*84
-        ) + "vw"
-    );
-
-
-    heart.style.setProperty(
-        "--size",
-        (
-            14 +
-            Math.random()*19
-        ) + "px"
-    );
-
-
-    heart.style.setProperty(
-        "--duration",
-        (
-            4.5 +
-            Math.random()*2.5
-        ) + "s"
-    );
-
-
-    heart.style.setProperty(
-        "--drift",
-        (
-            -70 +
-            Math.random()*140
-        ) + "px"
-    );
-
-
-    heart.style.setProperty(
-        "--drift2",
-        (
-            -100 +
-            Math.random()*200
-        ) + "px"
-    );
-
-
-    heart.style.setProperty(
-        "--drift3",
-        (
-            -130 +
-            Math.random()*260
-        ) + "px"
-    );
-
-
-    document.body.appendChild(
-        heart
-    );
-
-
-    setTimeout(
-        ()=>{
-            heart.remove();
-        },
-        7500
-    );
-}
-
-
-/* =========================================================
-   SON MESAJ
+   SON YAZI
 ========================================================= */
 
 function showFinalText(){
@@ -2509,7 +2346,9 @@ function showFinalText(){
     `;
 
 
-    document.body.appendChild(text);
+    document.body.appendChild(
+        text
+    );
 }
 
 </script>

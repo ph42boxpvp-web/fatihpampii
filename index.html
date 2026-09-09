@@ -12,81 +12,189 @@
   padding: 0;
 }
 
-body {
-  height: 100vh;
-  height: 100dvh;
+html, body {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  background: linear-gradient(135deg, #14001f, #3b073f, #12001b);
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 100%, #250038 0%, #090012 55%, #020006 100%);
   color: white;
   font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  user-select: none;
 }
 
 #screen {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 25px;
+  align-items: center;
+  text-align: center;
   cursor: pointer;
 }
 
 #content {
-  max-width: 90%;
-}
-
-.tap {
-  font-size: 20px;
-  opacity: .8;
-  animation: blink 1.3s infinite;
+  position: relative;
+  z-index: 20;
+  padding: 25px;
 }
 
 .message {
-  font-size: clamp(28px, 8vw, 50px);
+  font-size: clamp(30px, 8vw, 58px);
   font-weight: bold;
   line-height: 1.3;
   animation: appear .8s ease;
-  text-shadow: 0 0 20px rgba(255,100,200,.7);
+  text-shadow:
+    0 0 10px #ff4fa3,
+    0 0 25px #ff4fa3;
+}
+
+.tap {
+  font-size: 22px;
+  animation: blink 1.2s infinite;
+  color: #ffd6ec;
 }
 
 #countdown {
-  font-size: clamp(80px, 25vw, 160px);
+  font-size: clamp(100px, 30vw, 180px);
   font-weight: bold;
   color: #ff4fa3;
   text-shadow:
-    0 0 10px #ff4fa3,
-    0 0 30px #ff4fa3,
-    0 0 60px #ff0080;
-  animation: count .9s ease;
+    0 0 15px #ff4fa3,
+    0 0 40px #ff1493,
+    0 0 80px #ff1493;
+  animation: countdownAnim .9s ease;
 }
 
-#fireworks {
+/* Roket */
+#rocket {
+  position: fixed;
+  left: 50%;
+  bottom: -100px;
+  transform: translateX(-50%);
+  font-size: 55px;
+  z-index: 30;
+  display: none;
+}
+
+.rocket-fly {
+  display: block !important;
+  animation: rocketFly 2.3s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes rocketFly {
+  0% {
+    bottom: -100px;
+  }
+
+  100% {
+    bottom: 65%;
+  }
+}
+
+/* Roket ateşi */
+.flame {
+  position: fixed;
+  width: 12px;
+  height: 35px;
+  border-radius: 50%;
+  background: linear-gradient(#fff,#ffcc00,#ff4500);
+  box-shadow: 0 0 15px #ff6600;
+  display: none;
+  z-index: 29;
+}
+
+.flame.show {
+  display: block;
+  animation: flameMove .12s infinite alternate;
+}
+
+@keyframes flameMove {
+  from {
+    transform: scaleY(1);
+  }
+
+  to {
+    transform: scaleY(.65);
+  }
+}
+
+/* Patlama alanı */
+#explosion {
   position: fixed;
   inset: 0;
   pointer-events: none;
+  z-index: 15;
 }
 
-.heart {
+/* Kalp parçacıkları */
+.particle {
   position: fixed;
-  font-size: 35px;
+  font-size: 22px;
   pointer-events: none;
-  animation: heartFly 3s ease-out forwards;
-  z-index: 20;
+  opacity: 0;
+  animation: particleFly 2.2s ease-out forwards;
 }
 
-.spark {
+/* Son büyük kalp */
+#bigHeart {
   position: fixed;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: explode 1.5s ease-out forwards;
-  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: clamp(150px, 55vw, 330px);
+  z-index: 40;
+  opacity: 0;
+  filter:
+    drop-shadow(0 0 15px #ff1493)
+    drop-shadow(0 0 45px #ff1493)
+    drop-shadow(0 0 80px #ff1493);
+}
+
+.big-heart-show {
+  animation: bigHeartAppear 2s ease forwards;
+}
+
+@keyframes bigHeartAppear {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+
+  45% {
+    transform: translate(-50%, -50%) scale(1.25);
+    opacity: 1;
+  }
+
+  65% {
+    transform: translate(-50%, -50%) scale(.9);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes particleFly {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      scale(.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      scale(1.2);
+    opacity: 0;
+  }
 }
 
 @keyframes appear {
@@ -94,6 +202,7 @@ body {
     opacity: 0;
     transform: scale(.5);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -101,45 +210,24 @@ body {
 }
 
 @keyframes blink {
-  0%,100% { opacity: .3; }
-  50% { opacity: 1; }
+  0%,100% {
+    opacity: .35;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
-@keyframes count {
-  0% {
+@keyframes countdownAnim {
+  from {
     transform: scale(1.8);
     opacity: 0;
   }
-  100% {
+
+  to {
     transform: scale(1);
     opacity: 1;
-  }
-}
-
-@keyframes explode {
-  0% {
-    transform: translate(0,0) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(var(--x), var(--y)) scale(.1);
-    opacity: 0;
-  }
-}
-
-@keyframes heartFly {
-  0% {
-    transform: translate(0,0) scale(.5) rotate(0deg);
-    opacity: 1;
-  }
-
-  100% {
-    transform:
-      translate(var(--x), var(--y))
-      scale(1.4)
-      rotate(360deg);
-    opacity: 0;
   }
 }
 </style>
@@ -153,14 +241,24 @@ body {
   </div>
 </div>
 
-<div id="fireworks"></div>
+<div id="rocket">🚀</div>
+<div class="flame" id="flame"></div>
+
+<div id="explosion"></div>
+
+<div id="bigHeart">❤️</div>
 
 <script>
 
 const screen = document.getElementById("screen");
 const content = document.getElementById("content");
+const rocket = document.getElementById("rocket");
+const flame = document.getElementById("flame");
+const explosion = document.getElementById("explosion");
+const bigHeart = document.getElementById("bigHeart");
 
 let step = 0;
+let finished = false;
 
 const messages = [
   "Tıkla Fatih... ❤️",
@@ -171,7 +269,9 @@ const messages = [
   "Pampimmmmmmm ❤️"
 ];
 
-screen.addEventListener("click", () => {
+screen.addEventListener("click", function() {
+
+  if (finished) return;
 
   if (step < messages.length) {
 
@@ -183,23 +283,30 @@ screen.addEventListener("click", () => {
 
     step++;
 
-    // Son yazıdan sonra 7 saniye bekle
+    /*
+      Son yazı geldiğinde:
+      7 saniye bekle
+      sonra geri sayım başla
+    */
     if (step === messages.length) {
-      setTimeout(startCountdown, 7000);
+
+      setTimeout(() => {
+        startCountdown();
+      }, 7000);
     }
   }
-
 });
+
 
 function startCountdown() {
 
   let number = 7;
 
   content.innerHTML = `
-    <div id="countdown">${number}</div>
+    <div id="countdown">7</div>
   `;
 
-  const timer = setInterval(() => {
+  const counter = setInterval(() => {
 
     number--;
 
@@ -211,130 +318,144 @@ function startCountdown() {
 
     } else {
 
-      clearInterval(timer);
+      clearInterval(counter);
 
-      content.innerHTML = `
-        <div class="message">
-          ❤️ PAMPİMMM ❤️
-        </div>
-      `;
+      content.innerHTML = "";
 
-      launchFireworks();
+      launchRocket();
     }
 
   }, 1000);
 }
 
 
-function launchFireworks() {
+/*
+  TEK ROKET FIRLAT
+*/
+function launchRocket() {
 
-  // Birden fazla havai fişek
-  for (let i = 0; i < 12; i++) {
+  finished = true;
 
-    setTimeout(() => {
+  rocket.classList.add("rocket-fly");
+  flame.classList.add("show");
 
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight * .65;
+  // Roket ekranın üst kısmına geldiğinde patlat
+  setTimeout(() => {
 
-      createFirework(x, y);
+    rocket.style.display = "none";
+    flame.style.display = "none";
 
-    }, i * 350);
-  }
+    heartExplosion();
 
-  // Kalp yağmuru
-  for (let i = 0; i < 100; i++) {
-
-    setTimeout(() => {
-      createHeart();
-    }, i * 70);
-
-  }
+  }, 2200);
 }
 
 
-function createFirework(x, y) {
+/*
+  KALP ŞEKLİNDE PATLAMA
+*/
+function heartExplosion() {
 
-  const colors = [
-    "#ff4fa3",
-    "#ffcc00",
-    "#00ffff",
-    "#ffffff",
-    "#ff6b6b",
-    "#a855f7"
-  ];
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight * .35;
 
-  for (let i = 0; i < 45; i++) {
-
-    const spark = document.createElement("div");
-
-    spark.className = "spark";
-
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 70 + Math.random() * 180;
-
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
-
-    spark.style.left = x + "px";
-    spark.style.top = y + "px";
-
-    spark.style.background =
-      colors[Math.floor(Math.random() * colors.length)];
-
-    spark.style.boxShadow =
-      "0 0 10px " + spark.style.background;
-
-    spark.style.setProperty("--x", moveX + "px");
-    spark.style.setProperty("--y", moveY + "px");
-
-    document.getElementById("fireworks").appendChild(spark);
-
-    setTimeout(() => {
-      spark.remove();
-    }, 1600);
-  }
-}
-
-
-function createHeart() {
-
-  const heart = document.createElement("div");
-
-  heart.className = "heart";
-
-  const hearts = [
+  const heartSymbols = [
     "❤️",
     "💖",
     "💕",
     "💗",
     "💓",
-    "💘",
-    "🥰"
+    "💘"
   ];
 
-  heart.innerHTML =
-    hearts[Math.floor(Math.random() * hearts.length)];
+  /*
+    Matematiksel kalp eğrisi:
+    Bu sayede parçacıklar gerçekten kalp
+    şeklinde diziliyor.
+  */
 
-  const startX = Math.random() * window.innerWidth;
-  const startY = window.innerHeight + 30;
+  for (let i = 0; i < 100; i++) {
 
-  const moveX =
-    (Math.random() - .5) * 500;
+    const t = Math.PI * 2 * (i / 100);
 
-  const moveY =
-    -(300 + Math.random() * 600);
+    const x =
+      16 * Math.pow(Math.sin(t), 3);
 
-  heart.style.left = startX + "px";
-  heart.style.top = startY + "px";
+    const y =
+      -(13 * Math.cos(t)
+      - 5 * Math.cos(2*t)
+      - 2 * Math.cos(3*t)
+      - Math.cos(4*t));
 
-  heart.style.setProperty("--x", moveX + "px");
-  heart.style.setProperty("--y", moveY + "px");
+    const scale = 13;
 
-  document.body.appendChild(heart);
+    createParticle(
+      centerX,
+      centerY,
+      x * scale,
+      y * scale
+    );
+  }
+
+  /*
+    Patlamadan biraz sonra
+    ortada büyük kalp göster
+  */
 
   setTimeout(() => {
-    heart.remove();
-  }, 3000);
+
+    bigHeart.classList.add("big-heart-show");
+
+    content.innerHTML = `
+      <div class="message">
+        Seni çok seviyorum Fatih ❤️
+      </div>
+    `;
+
+    content.style.position = "fixed";
+    content.style.left = "50%";
+    content.style.top = "78%";
+    content.style.transform = "translateX(-50%)";
+
+  }, 900);
+}
+
+
+function createParticle(startX, startY, x, y) {
+
+  const particle = document.createElement("div");
+
+  particle.className = "particle";
+
+  const symbols = [
+    "❤️",
+    "💖",
+    "💕",
+    "💗",
+    "💓"
+  ];
+
+  particle.innerHTML =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  particle.style.left = startX + "px";
+  particle.style.top = startY + "px";
+
+  particle.style.setProperty(
+    "--x",
+    x + "px"
+  );
+
+  particle.style.setProperty(
+    "--y",
+    y + "px"
+  );
+
+  explosion.appendChild(particle);
+
+  setTimeout(() => {
+    particle.remove();
+  }, 2300);
 }
 
 </script>

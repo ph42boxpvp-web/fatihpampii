@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Fatih ❤️</title>
 
+
 <style>
+
+/* =====================================================
+   GENEL
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -15,13 +23,15 @@
     padding: 0;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
 body {
+
     background:
         radial-gradient(
             circle at 50% 100%,
@@ -31,19 +41,22 @@ body {
         );
 
     color: white;
+
     font-family: Arial, sans-serif;
 }
 
 
-/* =========================
+/* =====================================================
    ANA EKRAN
-========================= */
+===================================================== */
 
 #screen {
+
     width: 100%;
     height: 100%;
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
@@ -54,10 +67,13 @@ body {
 
 
 #content {
+
     position: relative;
+
     z-index: 100;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
@@ -67,7 +83,9 @@ body {
 
 
 .message {
-    font-size: clamp(30px, 8vw, 58px);
+
+    font-size:
+        clamp(30px, 8vw, 58px);
 
     font-weight: bold;
 
@@ -78,22 +96,25 @@ body {
         0 0 25px #ff4fa3,
         0 0 50px #ff1493;
 
-    animation: appear .7s ease;
+    animation:
+        appear .7s ease;
 }
 
 
 .tap {
+
     font-size: 22px;
 
     color: #ffd6ec;
 
-    animation: blink 1.2s infinite;
+    animation:
+        blink 1.2s infinite;
 }
 
 
-/* =========================
-   PAMPİM + GERİ SAYIM
-========================= */
+/* =====================================================
+   PAMPİM + SAYIM
+===================================================== */
 
 #pampimArea {
 
@@ -103,8 +124,7 @@ body {
 
     align-items: center;
 
-    gap: 20px;
-
+    gap: 18px;
 }
 
 
@@ -123,15 +143,13 @@ body {
         0 0 70px #ff1493;
 
     animation:
-        countdownAppear
-        .8s
-        ease;
+        countdownAppear .8s ease;
 }
 
 
-/* =========================
+/* =====================================================
    ROKET
-========================= */
+===================================================== */
 
 #rocket {
 
@@ -142,7 +160,6 @@ body {
     bottom: -180px;
 
     width: 90px;
-
     height: 190px;
 
     transform:
@@ -154,18 +171,16 @@ body {
 }
 
 
-/* Gövde */
+/* Roket gövdesi */
 
 .rocket-body {
 
     position: absolute;
 
     left: 50%;
-
     bottom: 30px;
 
     width: 55px;
-
     height: 125px;
 
     transform:
@@ -177,11 +192,11 @@ body {
     background:
         linear-gradient(
             90deg,
-            #666,
+            #555,
             #ddd 22%,
             white 50%,
             #ccc 70%,
-            #666
+            #555
         );
 
     box-shadow:
@@ -190,18 +205,16 @@ body {
 }
 
 
-/* Burun */
+/* Roket burnu */
 
 .rocket-nose {
 
     position: absolute;
 
     top: -30px;
-
     left: 0;
 
     width: 55px;
-
     height: 45px;
 
     background:
@@ -221,18 +234,16 @@ body {
 }
 
 
-/* Cam */
+/* Roket camı */
 
 .rocket-window {
 
     position: absolute;
 
     top: 27px;
-
     left: 50%;
 
     width: 25px;
-
     height: 25px;
 
     transform:
@@ -240,7 +251,8 @@ body {
 
     border-radius: 50%;
 
-    border: 4px solid #555;
+    border:
+        4px solid #555;
 
     background:
         radial-gradient(
@@ -255,21 +267,20 @@ body {
 }
 
 
-/* Kırmızı çizgi */
+/* Roket çizgisi */
 
 .rocket-line {
 
     position: absolute;
 
     left: 0;
-
-    width: 100%;
-
-    height: 6px;
-
     top: 67px;
 
-    background: #ff164d;
+    width: 100%;
+    height: 6px;
+
+    background:
+        #ff164d;
 }
 
 
@@ -282,7 +293,6 @@ body {
     bottom: 32px;
 
     width: 32px;
-
     height: 65px;
 
     background:
@@ -335,26 +345,25 @@ body {
     position: absolute;
 
     left: 50%;
-
     bottom: 15px;
 
     width: 30px;
-
     height: 25px;
 
     transform:
         translateX(-50%);
 
-    background: #222;
+    background:
+        #222;
 
     border-radius:
         0 0 12px 12px;
 }
 
 
-/* =========================
-   ALEV
-========================= */
+/* =====================================================
+   ROKET ALEVİ
+===================================================== */
 
 #flame {
 
@@ -365,7 +374,6 @@ body {
     bottom: -55px;
 
     width: 45px;
-
     height: 110px;
 
     transform:
@@ -380,7 +388,6 @@ body {
 .flame-core {
 
     width: 30px;
-
     height: 100px;
 
     position: absolute;
@@ -414,15 +421,13 @@ body {
     display: block;
 
     animation:
-        flameShake
-        .07s
-        infinite alternate;
+        flameShake .07s infinite alternate;
 }
 
 
-/* =========================
-   ROKET UÇUŞ
-========================= */
+/* =====================================================
+   ROKET UÇUŞU
+===================================================== */
 
 .rocket-active {
 
@@ -511,16 +516,15 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    DUMAN
-========================= */
+===================================================== */
 
 .smoke {
 
     position: fixed;
 
     width: 14px;
-
     height: 14px;
 
     border-radius: 50%;
@@ -528,16 +532,15 @@ body {
     background:
         rgba(210,210,210,.4);
 
-    filter: blur(5px);
+    filter:
+        blur(5px);
 
     z-index: 10;
 
     pointer-events: none;
 
     animation:
-        smoke .9s
-        ease-out
-        forwards;
+        smoke .9s ease-out forwards;
 }
 
 
@@ -545,34 +548,34 @@ body {
 
     0% {
 
-        transform: scale(.5);
+        transform:
+            scale(.5);
 
         opacity: .8;
     }
 
     100% {
 
-        transform: scale(3);
+        transform:
+            scale(3);
 
         opacity: 0;
     }
 }
 
 
-/* =========================
-   PATLAMA ALANI
-========================= */
+/* =====================================================
+   ANA PATLAMA
+===================================================== */
 
 #blast {
 
     position: fixed;
 
     left: 50%;
-
     top: 43%;
 
     width: 30px;
-
     height: 30px;
 
     border-radius: 50%;
@@ -586,8 +589,6 @@ body {
     pointer-events: none;
 }
 
-
-/* Ana ateş topu */
 
 .blast-active {
 
@@ -607,7 +608,8 @@ body {
             translate(-50%, -50%)
             scale(.1);
 
-        background: white;
+        background:
+            white;
 
         box-shadow:
             0 0 20px white;
@@ -621,7 +623,8 @@ body {
             translate(-50%, -50%)
             scale(3);
 
-        background: #fff;
+        background:
+            white;
 
         box-shadow:
             0 0 40px white,
@@ -669,20 +672,18 @@ body {
 }
 
 
-/* =========================
-   PATLAMA TOPLARI
-========================= */
+/* =====================================================
+   ATEŞ TOPLARI
+===================================================== */
 
 .fireball {
 
     position: fixed;
 
     left: 50%;
-
     top: 43%;
 
     width: 18px;
-
     height: 18px;
 
     border-radius: 50%;
@@ -697,7 +698,7 @@ body {
         );
 
     box-shadow:
-        0 0 10px #fff,
+        0 0 10px white,
         0 0 25px #ff8c00,
         0 0 45px #ff2600;
 
@@ -748,25 +749,24 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    KIVILCIMLAR
-========================= */
+===================================================== */
 
 .spark {
 
     position: fixed;
 
     left: 50%;
-
     top: 43%;
 
     width: 5px;
-
     height: 5px;
 
     border-radius: 50%;
 
-    background: white;
+    background:
+        white;
 
     box-shadow:
         0 0 8px white,
@@ -809,16 +809,15 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    ROKET PARÇALARI
-========================= */
+===================================================== */
 
 .rocket-piece {
 
     position: fixed;
 
     left: 50%;
-
     top: 43%;
 
     background:
@@ -867,9 +866,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    KALP PARÇACIKLARI
-========================= */
+===================================================== */
 
 #heartLayer {
 
@@ -888,7 +887,6 @@ body {
     position: fixed;
 
     left: 50%;
-
     top: 43%;
 
     opacity: 0;
@@ -938,17 +936,22 @@ body {
 }
 
 
-/* =========================
-   BÜYÜK KALP
-========================= */
+/* =====================================================
+   ARKA SİLİK BÜYÜK KALP
+===================================================== */
 
 #bigHeart {
 
     position: fixed;
 
     left: 50%;
-
     top: 43%;
+
+    width:
+        clamp(180px, 58vw, 340px);
+
+    height:
+        clamp(180px, 58vw, 340px);
 
     transform:
         translate(-50%, -50%)
@@ -956,35 +959,62 @@ body {
 
     opacity: 0;
 
-    z-index: 110;
+    z-index: 105;
 
-    font-size:
-        clamp(150px, 55vw, 330px);
+    display: flex;
 
-    filter:
-        drop-shadow(0 0 15px #ff1493)
-        drop-shadow(0 0 50px #ff1493)
-        drop-shadow(0 0 100px #ff1493);
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: none;
 }
 
 
-.big-heart-active {
+/*
+    Büyük silik kalbin kendisi
+*/
+
+#bigHeart::before {
+
+    content: "❤";
+
+    position: absolute;
+
+    font-size:
+        clamp(180px, 58vw, 340px);
+
+    color:
+        #ff1493;
+
+    opacity: .16;
+
+    filter:
+        blur(2px)
+        drop-shadow(0 0 20px #ff1493)
+        drop-shadow(0 0 60px #ff1493);
+
+    transform:
+        scale(1.1);
+}
+
+
+#bigHeart.big-heart-active {
 
     animation:
-        bigHeart
-        1.7s
+        backgroundHeart
+        3.5s
         ease
         forwards;
 }
 
 
-@keyframes bigHeart {
+@keyframes backgroundHeart {
 
     0% {
 
         transform:
             translate(-50%, -50%)
-            scale(0);
+            scale(.15);
 
         opacity: 0;
     }
@@ -993,7 +1023,7 @@ body {
 
         transform:
             translate(-50%, -50%)
-            scale(1.3);
+            scale(1.05);
 
         opacity: 1;
     }
@@ -1002,14 +1032,18 @@ body {
 
         transform:
             translate(-50%, -50%)
-            scale(.9);
+            scale(.96);
+
+        opacity: 1;
     }
 
-    75% {
+    70% {
 
         transform:
             translate(-50%, -50%)
-            scale(1.08);
+            scale(1);
+
+        opacity: 1;
     }
 
     100% {
@@ -1023,24 +1057,288 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
+   İÇİNDEN ÇIKAN KALP
+===================================================== */
+
+#innerHeart {
+
+    position: fixed;
+
+    left: 50%;
+    top: 43%;
+
+    z-index: 120;
+
+    font-size:
+        clamp(45px, 17vw, 105px);
+
+    color:
+        #ff174f;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(0 0 8px white)
+        drop-shadow(0 0 18px #ff1493)
+        drop-shadow(0 0 40px #ff1493)
+        drop-shadow(0 0 75px #ff1493);
+}
+
+
+.inner-heart-active {
+
+    animation:
+        innerHeartBirth
+        2.4s
+        cubic-bezier(.15,.8,.2,1)
+        forwards;
+}
+
+
+@keyframes innerHeartBirth {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+
+        opacity: 0;
+    }
+
+    25% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.35);
+
+        opacity: 1;
+    }
+
+    45% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.85);
+
+        opacity: 1;
+    }
+
+    58% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.72);
+    }
+
+    70% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.12);
+    }
+
+    80% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.94);
+    }
+
+    90% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.07);
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   KALP NABIZ HALKALARI
+===================================================== */
+
+.heart-ring {
+
+    position: fixed;
+
+    left: 50%;
+    top: 43%;
+
+    width: 70px;
+    height: 70px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.2);
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(255,20,147,.7);
+
+    box-shadow:
+        0 0 15px #ff1493,
+        inset 0 0 10px #ff1493;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 110;
+}
+
+
+.heart-ring.active {
+
+    animation:
+        heartRing
+        1.4s
+        ease-out
+        forwards;
+}
+
+
+@keyframes heartRing {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.2);
+
+        opacity: .9;
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(4.5);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   KALP PARLAMASI
+===================================================== */
+
+.heart-glow {
+
+    position: fixed;
+
+    left: 50%;
+    top: 43%;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background:
+        white;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    opacity: 0;
+
+    z-index: 119;
+
+    pointer-events: none;
+
+    filter:
+        blur(5px);
+}
+
+
+.heart-glow.active {
+
+    animation:
+        heartGlow
+        2.4s
+        ease
+        forwards;
+}
+
+
+@keyframes heartGlow {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+
+        opacity: 0;
+    }
+
+    30% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: .9;
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(2.5);
+
+        opacity: .4;
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
    SON YAZI
-========================= */
+===================================================== */
 
 #finalMessage {
 
     position: fixed;
 
     left: 50%;
-
     top: 80%;
+
+    width: 90%;
 
     transform:
         translateX(-50%);
 
-    width: 90%;
-
-    z-index: 120;
+    z-index: 150;
 
     text-align: center;
 
@@ -1055,11 +1353,12 @@ body {
 
     text-shadow:
         0 0 10px #ff4fa3,
-        0 0 30px #ff1493;
+        0 0 30px #ff1493,
+        0 0 60px #ff1493;
 
     animation:
         finalText
-        1s
+        1.2s
         ease
         forwards;
 }
@@ -1073,7 +1372,7 @@ body {
 
         transform:
             translateX(-50%)
-            translateY(20px);
+            translateY(25px);
     }
 
     to {
@@ -1087,16 +1386,14 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    EKRAN SARSINTISI
-========================= */
+===================================================== */
 
 .shake {
 
     animation:
-        shake
-        .45s
-        ease;
+        shake .45s ease;
 }
 
 
@@ -1128,9 +1425,9 @@ body {
 }
 
 
-/* =========================
-   ANİMASYONLAR
-========================= */
+/* =====================================================
+   GENEL ANİMASYONLAR
+===================================================== */
 
 @keyframes appear {
 
@@ -1184,15 +1481,16 @@ body {
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      ANA EKRAN
-========================= -->
+===================================================== -->
 
 <div id="screen">
 
@@ -1207,9 +1505,9 @@ body {
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      ROKET
-========================= -->
+===================================================== -->
 
 <div id="rocket">
 
@@ -1232,7 +1530,7 @@ body {
 </div>
 
 
-<!-- Alev -->
+<!-- Roket ateşi -->
 
 <div id="flame">
 
@@ -1246,20 +1544,36 @@ body {
 <div id="blast"></div>
 
 
-<!-- Kalp -->
+<!-- Kalp parçacıkları -->
 
 <div id="heartLayer"></div>
 
 
-<!-- Büyük kalp -->
+<!-- Silik büyük kalp -->
 
-<div id="bigHeart">
+<div id="bigHeart"></div>
+
+
+<!-- İçinden çıkan kalp -->
+
+<div id="innerHeart">
     ❤️
+</div>
+
+
+<!-- Kalp ışığı -->
+
+<div class="heart-glow"
+     id="heartGlow">
 </div>
 
 
 <script>
 
+
+/* =====================================================
+   ELEMENTLER
+===================================================== */
 
 const screen =
     document.getElementById("screen");
@@ -1288,6 +1602,10 @@ let step = 0;
 let finished = false;
 
 
+/* =====================================================
+   MESAJLAR
+===================================================== */
+
 const messages = [
 
     "Tıkla Fatih... ❤️",
@@ -1305,13 +1623,14 @@ const messages = [
 ];
 
 
-/* =========================
-   MESAJLAR
-========================= */
+/* =====================================================
+   TIKLAMA
+===================================================== */
 
 screen.addEventListener(
     "click",
     function() {
+
 
         if (finished)
             return;
@@ -1321,13 +1640,14 @@ screen.addEventListener(
 
 
             /*
-                SON MESAJ ÖZEL:
-
-                Pampim ekrana geldiğinde
-                kendi alanını oluşturuyor.
+                PAMPİM ÖZEL
             */
 
-            if (step === messages.length - 1) {
+            if (
+                step ===
+                messages.length - 1
+            ) {
+
 
                 content.innerHTML = `
 
@@ -1345,14 +1665,17 @@ screen.addEventListener(
 
                 `;
 
+
                 step++;
 
+
                 /*
-                    Pampim çıktıktan hemen sonra
-                    geri sayım başlıyor.
+                    PAMPİM GELDİĞİ
+                    ANDA SAYIM BAŞLIYOR
                 */
 
                 startCountdown();
+
 
                 return;
             }
@@ -1366,6 +1689,7 @@ screen.addEventListener(
 
             `;
 
+
             step++;
 
         }
@@ -1374,9 +1698,9 @@ screen.addEventListener(
 );
 
 
-/* =========================
+/* =====================================================
    GERİ SAYIM
-========================= */
+===================================================== */
 
 function startCountdown() {
 
@@ -1387,41 +1711,57 @@ function startCountdown() {
         setInterval(
             function() {
 
+
                 number--;
 
 
                 if (number > 0) {
+
 
                     const countdown =
                         document.getElementById(
                             "countdown"
                         );
 
+
                     if (countdown) {
+
 
                         countdown.textContent =
                             number;
 
+
                         countdown.style.animation =
                             "none";
 
+
                         void countdown.offsetWidth;
+
 
                         countdown.style.animation =
                             "countdownAppear .8s ease";
+
                     }
 
                 }
 
+
                 else {
 
-                    clearInterval(counter);
 
-                    content.innerHTML = "";
+                    clearInterval(
+                        counter
+                    );
+
+
+                    content.innerHTML =
+                        "";
+
 
                     launchRocket();
 
                 }
+
 
             },
             1000
@@ -1429,11 +1769,12 @@ function startCountdown() {
 }
 
 
-/* =========================
-   ROKET
-========================= */
+/* =====================================================
+   ROKET FIRLAT
+===================================================== */
 
 function launchRocket() {
+
 
     finished = true;
 
@@ -1449,15 +1790,17 @@ function launchRocket() {
 
 
     /*
-        Roket boyunca duman
+        Roket uçarken duman
     */
 
     const smokeTimer =
         setInterval(
             function() {
 
+
                 if (
-                    rocket.style.display === "none"
+                    rocket.style.display ===
+                    "none"
                 ) {
 
                     clearInterval(
@@ -1476,12 +1819,12 @@ function launchRocket() {
 
 
     /*
-        2.7 saniye sonra
-        roket PATLIYOR.
+        Roket hedefe ulaştığında patlıyor
     */
 
     setTimeout(
         function() {
+
 
             clearInterval(
                 smokeTimer
@@ -1489,7 +1832,7 @@ function launchRocket() {
 
 
             /*
-                ROKETİ GERÇEKTEN YOK EDİYORUZ
+                ROKET YOK OLUYOR
             */
 
             rocket.classList.remove(
@@ -1514,24 +1857,28 @@ function launchRocket() {
 
             rocketExplosion();
 
+
         },
         2700
     );
 }
 
 
-/* =========================
+/* =====================================================
    DUMAN
-========================= */
+===================================================== */
 
 function createSmoke() {
+
 
     const rect =
         rocket.getBoundingClientRect();
 
 
     const smoke =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     smoke.className =
@@ -1567,15 +1914,15 @@ function createSmoke() {
 }
 
 
-/* =========================
-   ROKET PATLAMASI
-========================= */
+/* =====================================================
+   PATLAMA
+===================================================== */
 
 function rocketExplosion() {
 
 
     /*
-        Ekran sarsılsın
+        Ekranı sars
     */
 
     screen.classList.add(
@@ -1596,14 +1943,16 @@ function rocketExplosion() {
 
 
     /*
-        Büyük patlama
+        Ana ateş topu
     */
 
     blast.classList.remove(
         "blast-active"
     );
 
+
     void blast.offsetWidth;
+
 
     blast.classList.add(
         "blast-active"
@@ -1656,8 +2005,7 @@ function rocketExplosion() {
 
 
     /*
-        Patlama biraz söndükten sonra
-        KALP ortaya çıkıyor.
+        Patlamadan sonra kalp
     */
 
     setTimeout(
@@ -1668,18 +2016,20 @@ function rocketExplosion() {
         },
         650
     );
-
 }
 
 
-/* =========================
+/* =====================================================
    ATEŞ TOPU
-========================= */
+===================================================== */
 
 function createFireball() {
 
+
     const ball =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     ball.className =
@@ -1728,14 +2078,17 @@ function createFireball() {
 }
 
 
-/* =========================
+/* =====================================================
    KIVILCIM
-========================= */
+===================================================== */
 
 function createSpark() {
 
+
     const spark =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     spark.className =
@@ -1784,14 +2137,17 @@ function createSpark() {
 }
 
 
-/* =========================
+/* =====================================================
    ROKET PARÇASI
-========================= */
+===================================================== */
 
 function createRocketPiece() {
 
+
     const piece =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     piece.className =
@@ -1854,14 +2210,15 @@ function createRocketPiece() {
 }
 
 
-/* =========================
+/* =====================================================
    MATEMATİKSEL KALP
-========================= */
+===================================================== */
 
 function heartEquation(t) {
 
+
     /*
-        Klasik parametrik kalp:
+        Kalp denklemi:
 
         x = 16 sin³(t)
 
@@ -1910,86 +2267,67 @@ function heartEquation(t) {
 }
 
 
-/* =========================
-   KALP
-========================= */
+/* =====================================================
+   KALP OLUŞTUR
+===================================================== */
 
 function createHeart() {
 
+
     /*
-        Önce kalbin dış çizgisi.
+        Kalbin dış çizgisi
     */
 
-    const points = [];
+    const amount = 180;
 
 
     for (
         let i = 0;
-        i < 180;
+        i < amount;
         i++
     ) {
 
-        const t =
-            (
-                Math.PI * 2
-            ) *
-            (
-                i / 180
-            );
-
-
-        points.push(
-            heartEquation(t)
-        );
-
-    }
-
-
-    /*
-        Dış kalp
-    */
-
-    points.forEach(
-        function(point, index) {
-
-            createHeartParticle(
-                point.x * 13,
-                point.y * 13,
-                index
-            );
-
-        }
-    );
-
-
-    /*
-        Kalbin içini doldur.
-    */
-
-    for (
-        let i = 0;
-        i < 180;
-        i++
-    ) {
 
         const t =
-            Math.random() *
-            Math.PI *
-            2;
+            Math.PI * 2 *
+            (i / amount);
 
 
         const point =
             heartEquation(t);
 
 
-        /*
-            0 ile 1 arasında
-            içe doğru çekiyoruz.
-        */
+        createHeartParticle(
+            point.x * 13,
+            point.y * 13,
+            i
+        );
+
+    }
+
+
+    /*
+        Kalbin içini doldur
+    */
+
+    for (
+        let i = 0;
+        i < 180;
+        i++
+    ) {
+
+
+        const t =
+            Math.random() *
+            Math.PI * 2;
+
+
+        const point =
+            heartEquation(t);
+
 
         const inside =
-            Math.random() *
-            .92;
+            Math.random() * .95;
 
 
         createHeartParticle(
@@ -2002,7 +2340,7 @@ function createHeart() {
             13 *
             inside,
 
-            i
+            i + 180
 
         );
 
@@ -2010,19 +2348,105 @@ function createHeart() {
 
 
     /*
-        Büyük kalp
+        =================================
+        SİLİK BÜYÜK KALP
+        =================================
     */
 
     setTimeout(
         function() {
+
 
             bigHeart.classList.add(
                 "big-heart-active"
             );
 
 
+        },
+        900
+    );
+
+
+    /*
+        =================================
+        İÇ KALP ÇIKIYOR
+        =================================
+    */
+
+    setTimeout(
+        function() {
+
+
+            const innerHeart =
+                document.getElementById(
+                    "innerHeart"
+                );
+
+
+            const glow =
+                document.getElementById(
+                    "heartGlow"
+                );
+
+
+            innerHeart.classList.add(
+                "inner-heart-active"
+            );
+
+
+            glow.classList.add(
+                "active"
+            );
+
+
+            createHeartRing();
+
+
+        },
+        1700
+    );
+
+
+    /*
+        İKİNCİ NABIZ
+    */
+
+    setTimeout(
+        function() {
+
+            createHeartRing();
+
+        },
+        2500
+    );
+
+
+    /*
+        ÜÇÜNCÜ NABIZ
+    */
+
+    setTimeout(
+        function() {
+
+            createHeartRing();
+
+        },
+        3300
+    );
+
+
+    /*
+        SON YAZI
+    */
+
+    setTimeout(
+        function() {
+
+
             const finalText =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             finalText.id =
@@ -2037,15 +2461,16 @@ function createHeart() {
                 finalText
             );
 
+
         },
-        1200
+        3900
     );
 }
 
 
-/* =========================
-   KALP PARÇACIK
-========================= */
+/* =====================================================
+   KALP PARÇACIĞI
+===================================================== */
 
 function createHeartParticle(
     x,
@@ -2053,8 +2478,11 @@ function createHeartParticle(
     index
 ) {
 
+
     const heart =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     heart.className =
@@ -2097,16 +2525,14 @@ function createHeartParticle(
         "--scale",
         (
             .4 +
-            Math.random() *
-            .7
+            Math.random() * .7
         )
     );
 
 
     heart.style.animationDelay =
         (
-            Math.random() *
-            .25
+            Math.random() * .25
         ) + "s";
 
 
@@ -2122,6 +2548,39 @@ function createHeartParticle(
 
         },
         3000
+    );
+}
+
+
+/* =====================================================
+   NABIZ HALKASI
+===================================================== */
+
+function createHeartRing() {
+
+
+    const ring =
+        document.createElement(
+            "div"
+        );
+
+
+    ring.className =
+        "heart-ring active";
+
+
+    document.body.appendChild(
+        ring
+    );
+
+
+    setTimeout(
+        function() {
+
+            ring.remove();
+
+        },
+        1500
     );
 }
 

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fatih ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3, #ff4d6d);
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      padding: 25px;
+      z-index: 10;
+      animation: appear 1.5s ease;
+    }
+
+    h1 {
+      font-size: clamp(32px, 10vw, 65px);
+      line-height: 1.2;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      animation: pulse 1.5s infinite;
+    }
+
+    .heart {
+      font-size: clamp(70px, 25vw, 150px);
+      margin-top: 20px;
+      display: inline-block;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+      animation: heartbeat 1s infinite;
+    }
+
+    .sub {
+      margin-top: 15px;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -50px;
+      color: #fff;
+      font-size: 25px;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(1.2);
+      }
+      40% {
+        transform: scale(1);
+      }
+      60% {
+        transform: scale(1.15);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.03);
+      }
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Telefonlarda biraz daha güzel görünmesi için */
+    @media (max-width: 600px) {
+      body {
+        min-height: 100dvh;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .heart {
+        font-size: 100px;
+      }
+
+      .sub {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Fatih,<br>seni çok seviyorum ❤️</h1>
+
+    <div class="heart">❤️</div>
+
+    <div class="sub">
+      Bu site sadece senin için 💕
+    </div>
+  </div>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+
+      heart.classList.add("floating-heart");
+
+      const hearts = ["❤️", "💖", "💕", "💗", "💓", "💘"];
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left = Math.random() * 100 + "vw";
+
+      const size = Math.random() * 25 + 15;
+      heart.style.fontSize = size + "px";
+
+      const duration = Math.random() * 4 + 4;
+      heart.style.animationDuration = duration + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+
+    // Sürekli kalp oluştur
+    setInterval(createHeart, 250);
+
+    // Sayfa açıldığında birkaç kalp
+    for (let i = 0; i < 15; i++) {
+      setTimeout(createHeart, i * 150);
+    }
+  </script>
+
+</body>
+</html>
